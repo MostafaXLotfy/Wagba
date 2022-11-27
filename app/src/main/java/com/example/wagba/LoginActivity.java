@@ -5,13 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
-    Intent myIntent;
+public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        myIntent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(myIntent);
+        setContentView(R.layout.activity_login);
     }
 }
