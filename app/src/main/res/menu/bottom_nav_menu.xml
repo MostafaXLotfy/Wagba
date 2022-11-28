@@ -17,5 +17,10 @@
         android:title="@string/restaurants"
         android:icon="@drawable/ic_outline_restaurant_24"
         />
+    <item
+        android:id="@+id/cart"
+        android:title="@string/cart"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        />
 
 </menu>
