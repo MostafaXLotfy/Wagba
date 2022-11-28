@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/profile"
+        android:title="@string/profile"
+        android:icon="@drawable/ic_baseline_person_24"
+        />
+
+    <item
+        android:id="@+id/orders"
+        android:title="@string/orders"
+        android:icon="@drawable/ic_baseline_receipt_long_24"
+        />
+
+    <item
+        android:id="@+id/restaurants"
+        android:title="@string/restaurants"
+        android:icon="@drawable/ic_outline_restaurant_24"
+        />
+
+</menu>

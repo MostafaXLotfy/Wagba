@@ -11,4 +11,8 @@
     <string name="clear">clear</string>
     <string name="name_placeholder">restaurant placeholder</string>
     <string name="description_placeholder">placeholder, placeholder</string>
+    <string name="profile">profile</string>
+    <string name="orders">orders</string>
+    <string name="home">Home</string>
+    <string name="restaurants">restaurants</string>
 </resources>
