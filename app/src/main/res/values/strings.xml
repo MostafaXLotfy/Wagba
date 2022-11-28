@@ -9,4 +9,6 @@
     <string name="confirm_password">confirm password</string>
     <string name="phone">Phone</string>
     <string name="clear">clear</string>
+    <string name="name_placeholder">restaurant placeholder</string>
+    <string name="description_placeholder">placeholder, placeholder</string>
 </resources>
