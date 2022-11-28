@@ -27,7 +27,7 @@
         android:autofillHints="emailAddress"
 
 
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <EditText
         android:id="@+id/et_password"
