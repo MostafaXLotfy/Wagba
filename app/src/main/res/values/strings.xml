@@ -21,4 +21,6 @@
     <string name="order_quantity_placeholder">1 delivered</string>
     <string name="date_placeholder">date placeholder</string>
     <string name="price_placeholder">0 EGP</string>
+    <string name="add">+</string>
+    <string name="available">available</string>
 </resources>
