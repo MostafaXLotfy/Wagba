@@ -52,7 +52,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:background="none"
         android:gravity="start|center"
         android:padding="0dp"
         android:text="@string/remove"
@@ -68,7 +67,8 @@
         app:layout_constraintStart_toStartOf="@id/tv_name"
         app:layout_constraintTop_toBottomOf="@id/tv_size"
         app:layout_goneMarginBottom="10dp"
-        tools:ignore="SmallSp" />
+        tools:ignore="SmallSp"
+        />
 
     <TextView
         android:id="@+id/tv_price"
