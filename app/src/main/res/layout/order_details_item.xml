@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/order_quantity_placeholder"
+        app:layout_constraintBottom_toBottomOf="@id/separator"
+        app:layout_constraintEnd_toStartOf="@id/tv_name"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.241" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/name_placeholder"
+        app:layout_constraintBottom_toTopOf="@+id/tv_size"
+        app:layout_constraintEnd_toStartOf="@id/tv_price"
+        app:layout_constraintStart_toEndOf="@id/tv_quantity"
+        app:layout_constraintTop_toTopOf="@id/tv_quantity"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_size"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:text="@string/regular"
+
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_remove"
+        app:layout_constraintEnd_toEndOf="@+id/tv_name"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+        app:layout_goneMarginBottom="10dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_remove"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="none"
+        android:gravity="start|center"
+        android:padding="0dp"
+        android:text="@string/remove"
+        android:textColor="@color/black"
+        android:textSize="8sp"
+        app:icon="@drawable/ic_baseline_delete_24"
+        app:iconGravity="start"
+        app:iconSize="20dp"
+        app:iconTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/separator"
+        app:layout_constraintEnd_toEndOf="@id/tv_name"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/tv_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_size"
+        app:layout_goneMarginBottom="10dp"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="end|center"
+        android:text="@string/price_placeholder"
+        app:layout_constraintBottom_toBottomOf="@id/tv_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.19"
+        app:layout_constraintStart_toEndOf="@id/tv_name"
+
+        app:layout_constraintTop_toTopOf="@id/tv_name"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_remove" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

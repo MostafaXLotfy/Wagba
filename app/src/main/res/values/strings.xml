@@ -23,4 +23,13 @@
     <string name="price_placeholder">0 EGP</string>
     <string name="add">+</string>
     <string name="available">available</string>
+    <string name="your_order_from">Your order from</string>
+    <string name="add_items">add items</string>
+    <string name="remove">Remove</string>
+    <string name="regular">Regular</string>
+    <string name="payment_details">Payment details</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="Tax">Tax</string>
+    <string name="delivery_fees">Delivery fees</string>
+    <string name="total">Total</string>
 </resources>
