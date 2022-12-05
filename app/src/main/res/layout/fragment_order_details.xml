@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Basket.orderDetailsFragment">
-
+    tools:context=".Basket.OrderDetails.OrderDetailsFragment">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,9 +15,11 @@
         app:cardUseCompatPadding="true"
         >
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_order_details"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:listitem="@layout/order_details_item"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
     </androidx.cardview.widget.CardView>
 

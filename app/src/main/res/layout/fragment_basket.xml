@@ -5,44 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Basket.BasketFragment">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/frag_order_restaurant"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:name="com.example.wagba.Basket.OrderRestaurantFragment"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/frag_order_details"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:layout="@layout/fragment_order_restaurant" />
+            android:layout_height="wrap_content">
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/frag_order_restaurant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:name="com.example.wagba.Basket.OrderRestaurant.OrderRestaurantFragment"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/frag_order_details"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout="@layout/fragment_order_restaurant" />
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/frag_order_details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/frag_order_restaurant"
-            app:layout_constraintBottom_toTopOf="@id/frag_payment_details"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout="@layout/fragment_order_details"
-            />
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/frag_order_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/frag_order_restaurant"
+                app:layout_constraintBottom_toTopOf="@id/frag_payment_details"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout="@layout/fragment_order_details"
+                />
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/frag_payment_details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/frag_order_details"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout="@layout/fragment_payment_detail"
-            />
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/frag_payment_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/frag_order_details"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout="@layout/fragment_payment_detail"
+                />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 
 </FrameLayout>
