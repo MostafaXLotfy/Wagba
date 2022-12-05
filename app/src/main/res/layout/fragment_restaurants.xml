@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".RestaurantsFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Restaurants.RestaurantsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_restaurants"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/restaurants_item" />
+        tools:listitem="@layout/restaurants_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
 
 </FrameLayout>
