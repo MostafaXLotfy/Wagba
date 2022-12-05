@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrdersFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Orders.OrdersFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_orders"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/orders_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
 
 </FrameLayout>
