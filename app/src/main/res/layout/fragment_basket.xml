@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BasketFragment">
+    tools:context=".Basket.BasketFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
             android:id="@+id/frag_order_restaurant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:name="com.example.wagba.OrderRestaurantFragment"
+            android:name="com.example.wagba.Basket.OrderRestaurantFragment"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/frag_order_details"
             app:layout_constraintStart_toStartOf="parent"

@@ -1,4 +1,4 @@
-package com.example.wagba;
+package com.example.wagba.Basket;
 
 import android.os.Bundle;
 
@@ -7,20 +7,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
-import com.example.wagba.databinding.FragmentBasketBinding;
+import com.example.wagba.R;
+import com.example.wagba.databinding.FragmentOrderDetailsBinding;
 
-public class BasketFragment extends Fragment {
+public class orderDetailsFragment extends Fragment {
+    FragmentOrderDetailsBinding binding;
 
-    FragmentBasketBinding binding;
-    public BasketFragment() {
+    public orderDetailsFragment() {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-    public static BasketFragment newInstance() {
-        BasketFragment fragment = new BasketFragment();
+    public static orderDetailsFragment newInstance(String param1, String param2) {
+        orderDetailsFragment fragment = new orderDetailsFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -36,16 +35,16 @@ public class BasketFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = FragmentBasketBinding.inflate(inflater, container, false);
+
+        binding =  FragmentOrderDetailsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         return view;
 
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onDestroy() {
+        super.onDestroy();
         binding = null;
     }
 }
