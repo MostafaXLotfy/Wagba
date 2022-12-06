@@ -1,16 +1,16 @@
-package com.example.wagba.Orders;
+package com.example.wagba.MyOrders;
 
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class OrdersModel {
+public class MyOrdersModel {
     private String restaurantName;
     private int quantity;
     private Date date;
     private Float price;
 
-    public OrdersModel(String restaurantName, int quantity, Date date, Float price) {
+    public MyOrdersModel(String restaurantName, int quantity, Date date, Float price) {
         this.restaurantName = restaurantName;
         this.quantity = quantity;
         this.date = date;
