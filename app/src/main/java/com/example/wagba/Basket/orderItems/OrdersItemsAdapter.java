@@ -1,4 +1,4 @@
-package com.example.wagba.Basket.OrderDetails;
+package com.example.wagba.Basket.orderItems;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,16 +11,16 @@ import com.example.wagba.databinding.OrderDetailsItemBinding;
 
 import java.util.ArrayList;
 
-public class OrdersDetailsAdapter extends RecyclerView.Adapter<OrdersDetailsAdapter.ViewHolder> {
-    ArrayList<OrderDetailsModel> orderDetailsModels;
+public class OrdersItemsAdapter extends RecyclerView.Adapter<OrdersItemsAdapter.ViewHolder> {
+    ArrayList<OrderItemsModel> orderItemsModels;
 
-    public OrdersDetailsAdapter(ArrayList<OrderDetailsModel> orderDetailsModels) {
-        this.orderDetailsModels = orderDetailsModels;
+    public OrdersItemsAdapter(ArrayList<OrderItemsModel> orderItemsModels) {
+        this.orderItemsModels = orderItemsModels;
     }
 
     @NonNull
     @Override
-    public OrdersDetailsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public OrdersItemsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         OrderDetailsItemBinding binding = OrderDetailsItemBinding.inflate(inflater,
@@ -30,17 +30,17 @@ public class OrdersDetailsAdapter extends RecyclerView.Adapter<OrdersDetailsAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OrdersDetailsAdapter.ViewHolder holder, int position) {
-        OrderDetailsModel orderDetailsModel = orderDetailsModels.get(position);
-        holder.binding.tvName.setText(orderDetailsModel.getMealName());
-        holder.binding.tvPrice.setText(orderDetailsModel.getPrice());
-        holder.binding.tvQuantity.setText(orderDetailsModel.getQuantity());
-        holder.binding.tvSize.setText(orderDetailsModel.getSize());
+    public void onBindViewHolder(@NonNull OrdersItemsAdapter.ViewHolder holder, int position) {
+        OrderItemsModel orderItemsModel = orderItemsModels.get(position);
+        holder.binding.tvName.setText(orderItemsModel.getMealName());
+        holder.binding.tvPrice.setText(orderItemsModel.getPrice());
+        holder.binding.tvQuantity.setText(orderItemsModel.getQuantity());
+        holder.binding.tvSize.setText(orderItemsModel.getSize());
     }
 
     @Override
     public int getItemCount() {
-        return orderDetailsModels.size();
+        return orderItemsModels.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.wagba.Basket.OrderDetails.OrderDetailsModel;
-import com.example.wagba.Basket.OrderDetails.OrdersDetailsAdapter;
+import com.example.wagba.Basket.orderItems.OrderItemsModel;
+import com.example.wagba.Basket.orderItems.OrdersItemsAdapter;
 import com.example.wagba.MainActivity;
 import com.example.wagba.databinding.FragmentBasketBinding;
 
@@ -65,38 +65,38 @@ public class BasketFragment extends Fragment {
     public void init_data(){
 
         String restaurantName = "Food Corner";
-        ArrayList<OrderDetailsModel> orderDetailsModels = new ArrayList<>();
-        orderDetailsModels.add(new OrderDetailsModel(
+        ArrayList<OrderItemsModel> orderItemsModels = new ArrayList<>();
+        orderItemsModels.add(new OrderItemsModel(
                 1,
                 "Crispy Crepe",
                 "Regular",
                 35.0f));
 
-        orderDetailsModels.add(new OrderDetailsModel(
+        orderItemsModels.add(new OrderItemsModel(
                 2,
                 "Cheese Mix Crepe",
                 "Regular",
                 35.0f));
 
-        orderDetailsModels.add(new OrderDetailsModel(
+        orderItemsModels.add(new OrderItemsModel(
                 1,
                 "Hot Dog Crepe",
                 "Regular",
                 35.0f));
-        orderDetailsModels.add(new OrderDetailsModel(
+        orderItemsModels.add(new OrderItemsModel(
                 2,
                 "sus Crepe",
                 "Regular",
                 35.0f));
 
         float deliveryFees = 0.5f;
-        basketModel = new BasketModel(restaurantName, deliveryFees,orderDetailsModels);
+        basketModel = new BasketModel(restaurantName, deliveryFees, orderItemsModels);
 
     }
     public void populate_data(){
         binding.tvName.setText(basketModel.getRestaurantName());
-        OrdersDetailsAdapter adapter =
-                new OrdersDetailsAdapter(basketModel.getOrderDetailsModels());
+        OrdersItemsAdapter adapter =
+                new OrdersItemsAdapter(basketModel.getOrderDetailsModels());
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
 
         DividerItemDecoration dividerItemDecoration =
