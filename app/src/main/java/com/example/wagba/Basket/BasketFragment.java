@@ -8,16 +8,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.wagba.Basket.OrderDetails.OrderDetailsFragment;
 import com.example.wagba.Basket.OrderDetails.OrderDetailsModel;
-import com.example.wagba.Basket.OrderRestaurant.OrderRestaurantFragment;
-import com.example.wagba.Basket.PaymentDetail.PaymentDetailFragment;
-import com.example.wagba.Basket.PaymentDetail.PaymentDetailModel;
+import com.example.wagba.Basket.OrderDetails.OrdersDetailsAdapter;
 import com.example.wagba.MainActivity;
-import com.example.wagba.R;
 import com.example.wagba.databinding.FragmentBasketBinding;
 
 import java.util.ArrayList;
@@ -26,9 +22,7 @@ public class BasketFragment extends Fragment {
 
     private FragmentBasketBinding binding;
     private MainActivity activity;
-    private String restaurantName;
-    private ArrayList<OrderDetailsModel> orderDetailsModels;
-    private PaymentDetailModel paymentDetailModel;
+    BasketModel basketModel;
 
     public BasketFragment() {
         // Required empty public constructor
@@ -46,6 +40,8 @@ public class BasketFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
+        init_data();
+
     }
 
     @Override
@@ -62,8 +58,14 @@ public class BasketFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         activity = (MainActivity) getActivity();
-        restaurantName = "Food Corner";
-        orderDetailsModels = new ArrayList<>();
+        populate_data();
+
+    }
+
+    public void init_data(){
+
+        String restaurantName = "Food Corner";
+        ArrayList<OrderDetailsModel> orderDetailsModels = new ArrayList<>();
         orderDetailsModels.add(new OrderDetailsModel(
                 1,
                 "Crispy Crepe",
@@ -87,24 +89,28 @@ public class BasketFragment extends Fragment {
                 "Regular",
                 35.0f));
 
-        paymentDetailModel = new PaymentDetailModel(100.0f, 10.0f);
+        float deliveryFees = 0.5f;
+        basketModel = new BasketModel(restaurantName, deliveryFees,orderDetailsModels);
 
-
-
-        OrderRestaurantFragment orderRestaurantFragment =
-                OrderRestaurantFragment.newInstance(restaurantName);
-        OrderDetailsFragment orderDetailsFragment = OrderDetailsFragment.newInstance(orderDetailsModels);
-        PaymentDetailFragment paymentDetailFragment = PaymentDetailFragment.newInstance(paymentDetailModel);
-
-        FragmentManager fm = activity.getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-
-        ft.replace(R.id.frag_order_restaurant, orderRestaurantFragment);
-        ft.replace(R.id.frag_order_details, orderDetailsFragment);
-        ft.replace(R.id.frag_payment_details, paymentDetailFragment);
-        ft.commit();
     }
+    public void populate_data(){
+        binding.tvName.setText(basketModel.getRestaurantName());
+        OrdersDetailsAdapter adapter =
+                new OrdersDetailsAdapter(basketModel.getOrderDetailsModels());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
 
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(activity,layoutManager.getOrientation());
+
+        binding.rcOrderDetails.setAdapter(adapter);
+        binding.rcOrderDetails.setLayoutManager(layoutManager);
+        binding.rcOrderDetails.addItemDecoration(dividerItemDecoration);
+
+        binding.tvSubtotalAmount.setText(basketModel.getSubTotal());
+        binding.tvTotalAmount.setText(basketModel.getTotal());
+        binding.tvTaxAmount.setText(basketModel.getTax());
+        binding.tvDeliveryAmount.setText(basketModel.getDeliveryFees());
+    }
 
     @Override
     public void onDestroyView() {
