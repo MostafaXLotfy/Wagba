@@ -1,12 +1,15 @@
 package com.example.wagba.Restaurants;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wagba.Restaurant.RestaurantActivity;
 import com.example.wagba.databinding.RestaurantsItemBinding;
 
 import java.util.ArrayList;
@@ -33,6 +36,11 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         RestaurantsModel restaurantsModel = restaurantsModels.get(position);
         holder.binding.tvName.setText(restaurantsModel.getName());
         holder.binding.tvDescription.setText(restaurantsModel.getDescription());
+        holder.binding.getRoot().setOnClickListener(view ->{
+            Context context = view.getContext();
+            Intent intent = new Intent(context, RestaurantActivity.class);
+            context.startActivity(intent);
+        });
     }
 
     @Override
