@@ -1,12 +1,12 @@
 package com.example.wagba.Basket;
 
-import com.example.wagba.Basket.OrderDetails.OrderDetailsModel;
+import com.example.wagba.Basket.orderItems.OrderItemsModel;
 
 import java.util.ArrayList;
 
 public class BasketModel {
     private String RestaurantName;
-    private ArrayList<OrderDetailsModel> orderDetailsModels;
+    private ArrayList<OrderItemsModel> orderItemsModels;
 
     private float subTotal;
     private float tax;
@@ -17,8 +17,8 @@ public class BasketModel {
         return RestaurantName;
     }
 
-    public ArrayList<OrderDetailsModel> getOrderDetailsModels() {
-        return orderDetailsModels;
+    public ArrayList<OrderItemsModel> getOrderDetailsModels() {
+        return orderItemsModels;
     }
 
 
@@ -41,13 +41,13 @@ public class BasketModel {
     public BasketModel(
             String restaurantName,
             float deliveryFees,
-            ArrayList<OrderDetailsModel> orderDetailsModels
+            ArrayList<OrderItemsModel> orderItemsModels
     ) {
         RestaurantName = restaurantName;
-        this.orderDetailsModels = orderDetailsModels;
-        OrderDetailsModel model;
-        for (int i = 0; i < orderDetailsModels.size(); i++){
-            model = orderDetailsModels.get(i);
+        this.orderItemsModels = orderItemsModels;
+        OrderItemsModel model;
+        for (int i = 0; i < orderItemsModels.size(); i++){
+            model = orderItemsModels.get(i);
             this.subTotal += model.getTotalPrice();
         }
         this.tax = subTotal * 0.14f;

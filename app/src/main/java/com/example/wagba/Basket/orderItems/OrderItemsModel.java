@@ -1,15 +1,14 @@
-package com.example.wagba.Basket.OrderDetails;
+package com.example.wagba.Basket.orderItems;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
-public class OrderDetailsModel{
+public class OrderItemsModel {
     private int quantity;
     private String mealName;
     private String size;
     private float price;
 
-    protected OrderDetailsModel(Parcel in) {
+    protected OrderItemsModel(Parcel in) {
         quantity = in.readInt();
         mealName = in.readString();
         size = in.readString();
@@ -38,7 +37,7 @@ public class OrderDetailsModel{
         return this.price * this.quantity;
 
     }
-    public OrderDetailsModel(int quantity, String mealName, String size, float price) {
+    public OrderItemsModel(int quantity, String mealName, String size, float price) {
         this.quantity = quantity;
         this.mealName = mealName;
         this.size = size;

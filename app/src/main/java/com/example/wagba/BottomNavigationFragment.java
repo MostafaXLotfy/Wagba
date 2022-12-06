@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.wagba.Basket.BasketFragment;
+import com.example.wagba.MyOrders.MyOrdersFragment;
+import com.example.wagba.Restaurants.RestaurantsFragment;
 import com.example.wagba.databinding.FragmentBottomNavigationBinding;
 
 /**
@@ -21,7 +24,7 @@ import com.example.wagba.databinding.FragmentBottomNavigationBinding;
 public class BottomNavigationFragment extends Fragment {
 
     FragmentBottomNavigationBinding binding;
-    OrdersFragment ordersFragment;
+    MyOrdersFragment myOrdersFragment;
     BasketFragment basketFragment;
     RestaurantsFragment restaurantsFragment;
     MainActivity activity;
@@ -58,7 +61,7 @@ public class BottomNavigationFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         basketFragment = BasketFragment.newInstance();
-        ordersFragment = OrdersFragment.newInstance();
+        myOrdersFragment = MyOrdersFragment.newInstance();
         restaurantsFragment = RestaurantsFragment.newInstance();
         //todo:: refactor
         binding.fcvNavigation.setOnItemSelectedListener(item -> {
@@ -74,7 +77,7 @@ public class BottomNavigationFragment extends Fragment {
                 replaceContentFragment(R.id.fcv_content, restaurantsFragment);
                 return true;
             } else if (itemId == R.id.orders) {
-                    replaceContentFragment(R.id.fcv_content, ordersFragment);
+                    replaceContentFragment(R.id.fcv_content, myOrdersFragment);
                 return true;
             }
             return false;
