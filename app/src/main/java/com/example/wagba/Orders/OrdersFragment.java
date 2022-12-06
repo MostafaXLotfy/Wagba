@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,7 +62,16 @@ public class OrdersFragment extends Fragment {
         ordersModels.add(new OrdersModel("Papa Jones", 2, new Date(), 120.0f));
         ordersModels.add(new OrdersModel("Karam El-Sham", 2, new Date(), 53.0f));
         OrdersAdapter ordersAdapter = new OrdersAdapter(ordersModels);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(view.getContext(),layoutManager.getOrientation());
+
         binding.rcOrders.setAdapter(ordersAdapter);
+        binding.rcOrders.setLayoutManager(layoutManager);
+        binding.rcOrders.addItemDecoration(dividerItemDecoration);
+
+
     }
 
     @Override
