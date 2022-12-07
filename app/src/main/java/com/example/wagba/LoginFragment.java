@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.wagba.Restaurants.RestaurantsFragment;
 import com.example.wagba.databinding.FragmentLoginBinding;
 
 public class LoginFragment extends Fragment {

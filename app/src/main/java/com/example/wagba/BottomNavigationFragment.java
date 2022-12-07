@@ -27,6 +27,7 @@ public class BottomNavigationFragment extends Fragment {
     MyOrdersFragment myOrdersFragment;
     BasketFragment basketFragment;
     RestaurantsFragment restaurantsFragment;
+    SearchFragment searchFragment;
     MainActivity activity;
 
     public BottomNavigationFragment() {
@@ -46,6 +47,10 @@ public class BottomNavigationFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
+        basketFragment = BasketFragment.newInstance();
+        myOrdersFragment = MyOrdersFragment.newInstance();
+        restaurantsFragment = RestaurantsFragment.newInstance();
+        searchFragment = SearchFragment.newInstance();
     }
 
     @Override
@@ -60,17 +65,10 @@ public class BottomNavigationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        basketFragment = BasketFragment.newInstance();
-        myOrdersFragment = MyOrdersFragment.newInstance();
-        restaurantsFragment = RestaurantsFragment.newInstance();
         //todo:: refactor
         binding.fcvNavigation.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
-            if (itemId == R.id.profile) {
-//                ((MainActivity) getActivity()).getSupportFragmentManager()
-//                        .beginTransaction().replace(R.id.fcv_content)
-                return true;
-            } else if (itemId == R.id.cart) {
+            if (itemId == R.id.cart) {
                 replaceContentFragment(R.id.fcv_content, basketFragment);
                 return true;
             } else if (itemId == R.id.restaurants) {

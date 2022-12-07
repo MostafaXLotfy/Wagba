@@ -33,4 +33,6 @@
     <string name="delivery_fees">Delivery fees</string>
     <string name="total">Total</string>
     <string name="search_restaurant_or_dish">Search restaurant or dish</string>
+    <string name="_1x">1X</string>
+    <string name="mines">-</string>
 </resources>

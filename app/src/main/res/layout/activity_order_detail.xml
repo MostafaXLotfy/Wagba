@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/iv_image"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -39,14 +39,16 @@
 
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp"
-                    android:src="@drawable/ic_outline_restaurant_24"
+                    android:src="@drawable/pizza_hut_logo"
                     app:layout_constraintBottom_toBottomOf="@id/tv_name"
                     app:layout_constraintEnd_toStartOf="@id/tv_orders_from"
 
                     app:layout_constraintHorizontal_bias="0.1"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    style="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                    />
 
                 <TextView
                     android:id="@+id/tv_orders_from"
@@ -59,7 +61,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_image"
                     app:layout_constraintTop_toTopOf="@id/iv_image"
-                    app:layout_constraintVertical_chainStyle="packed" />
+                    app:layout_constraintVertical_chainStyle="packed"
+                    style="@style/SecondaryText"
+                    />
 
                 <TextView
                     android:id="@+id/tv_name"
@@ -73,7 +77,7 @@
 
                     app:layout_constraintStart_toStartOf="@id/tv_orders_from"
                     app:layout_constraintTop_toBottomOf="@id/tv_orders_from"
-
+                    style="@style/PrimaryText"
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,35 +36,40 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/iv_image"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:layout_marginTop="20dp"
 
                         android:layout_marginEnd="20dp"
+                        android:layout_marginStart="20dp"
                         android:layout_marginBottom="20dp"
-                        android:src="@drawable/ic_outline_restaurant_24"
+                        android:layout_marginTop="20dp"
+
+                        android:src="@drawable/pizza_hut_logo"
                         app:layout_constraintBottom_toBottomOf="@id/tv_name"
                         app:layout_constraintEnd_toStartOf="@id/tv_orders_from"
 
                         app:layout_constraintHorizontal_bias="0.1"
                         app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                        />
 
                     <TextView
                         android:id="@+id/tv_orders_from"
+                        style="@style/SecondaryText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
 
                         android:text="@string/your_order_from"
-
                         app:layout_constraintBottom_toTopOf="@id/tv_name"
                         app:layout_constraintEnd_toStartOf="@id/btn_add"
                         app:layout_constraintStart_toEndOf="@id/iv_image"
                         app:layout_constraintTop_toTopOf="@id/iv_image"
-                        app:layout_constraintVertical_chainStyle="packed" />
+                        app:layout_constraintVertical_chainStyle="packed"
+                        />
 
                     <TextView
                         android:id="@+id/tv_name"
@@ -78,40 +83,31 @@
 
                         app:layout_constraintEnd_toEndOf="@id/tv_orders_from"
                         app:layout_constraintStart_toStartOf="@id/tv_orders_from"
+                        style="@style/PrimaryText"
 
                         />
+
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_add"
+                        style="@style/outlinedButton"
                         android:layout_width="48dp"
+
+
                         android:layout_height="48dp"
 
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:padding="0dp"
                         android:text="@string/add"
 
-                        app:layout_constraintTop_toTopOf="@+id/tv_orders_from"
-                        app:layout_constraintBottom_toTopOf="@id/tv_add"
 
-                        app:layout_constraintStart_toEndOf="@id/tv_name"
+                        app:cornerRadius="5dp"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.673"
+                        app:layout_constraintStart_toEndOf="@id/tv_name"
+                        app:layout_constraintTop_toTopOf="@+id/tv_orders_from" />
 
-                        app:layout_constraintHorizontal_bias="0.9"
-
-                        app:cornerRadius="50dp"
-                        android:insetLeft="0dp"
-                        android:insetBottom="0dp"
-                        android:insetTop="0dp"
-                        android:insetRight="0dp"
-                        />
-
-
-                    <TextView
-                        android:id="@+id/tv_add"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:text="@string/add_items"
-                        app:layout_constraintEnd_toEndOf="@id/btn_add"
-                        app:layout_constraintStart_toStartOf="@id/btn_add"
-                        app:layout_constraintTop_toBottomOf="@id/btn_add" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -160,6 +156,7 @@
                         app:layout_constraintHorizontal_bias="0.051"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        style="@style/PrimaryText"
                         />
 
                     <TextView
@@ -173,6 +170,7 @@
                         app:layout_constraintStart_toStartOf="@id/tv_payment_details"
                         app:layout_constraintTop_toBottomOf="@id/tv_payment_details"
                         android:layout_marginEnd="20dp"
+                        style="@style/SecondaryText"
                         />
 
                     <TextView
@@ -186,6 +184,7 @@
                         android:layout_marginEnd="10dp"
                         android:text="@string/subtotal"
                         android:gravity="end"
+                        style="@style/price"
                         />
 
                     <TextView
@@ -200,6 +199,7 @@
                         app:layout_constraintStart_toStartOf="@id/tv_payment_details"
                         app:layout_constraintTop_toBottomOf="@id/tv_subtotal"
                         android:layout_marginEnd="20dp"
+                        style="@style/SecondaryText"
                         />
 
                     <TextView
@@ -212,6 +212,7 @@
                         app:layout_constraintEnd_toEndOf="@id/tv_subtotal_amount"
                         android:text="@string/subtotal"
                         android:gravity="end"
+                        style="@style/price"
                         />
 
                     <TextView
@@ -223,6 +224,7 @@
                         app:layout_constraintStart_toStartOf="@id/tv_payment_details"
                         android:layout_marginEnd="20dp"
                         android:text="@string/delivery_fees"
+                        style="@style/SecondaryText"
                         />
 
                     <TextView
@@ -235,6 +237,7 @@
                         app:layout_constraintEnd_toEndOf="@id/tv_subtotal_amount"
                         android:text="@string/subtotal"
                         android:gravity="end"
+                        style="@style/price"
                         />
 
                     <TextView
@@ -248,6 +251,7 @@
                         app:layout_constraintStart_toStartOf="@id/tv_payment_details"
                         app:layout_constraintTop_toBottomOf="@id/tv_delivery"
                         android:layout_marginBottom="10dp"
+                        style="@style/SecondaryText"
                         />
 
                     <TextView
@@ -261,6 +265,7 @@
                         app:layout_constraintTop_toTopOf="@id/tv_total"
 
                         android:gravity="end"
+                        style="@style/price"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>

@@ -1,6 +1,8 @@
 package com.example.wagba.Restaurant;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -24,17 +26,21 @@ public class RestaurantActivity extends AppCompatActivity {
         setContentView(view);
         init_data();
         populate_layout();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, linearLayoutManager.getOrientation());
+
+        binding.rvMeals.addItemDecoration(dividerItemDecoration);
 
     }
 
     public void init_data(){
         ArrayList<MealsModel> mealsModels = new ArrayList<>();
-        mealsModels.add(new MealsModel("Cheese Crepe", "Mozarilla", 30.0f, true));
-        mealsModels.add(new MealsModel("Crispy Crepe", "Crispy", 30.0f, true));
-        mealsModels.add(new MealsModel("Hot Dog Crepe", "Hot Dog", 30.0f, true));
-        mealsModels.add(new MealsModel("Hot Dog Crepe", "Hot Dog", 30.0f, true));
-        mealsModels.add(new MealsModel("Hot Dog Crepe", "Hot Dog", 30.0f, true));
-        mealsModels.add(new MealsModel("Hot Dog Crepe", "Hot Dog", 30.0f, true));
+        mealsModels.add(new MealsModel("Cheese Crepe", "Mozarilla, Keary", 30.0f, true));
+        mealsModels.add(new MealsModel("Crispy Crepe", "Crispy, Mozarilla", 30.0f, true));
+        mealsModels.add(new MealsModel("Hot Dog Crepe", "Hot Dog, Mozarilla", 30.0f, true));
+        mealsModels.add(new MealsModel("Hot Dog Crepe", "Hot Dog, Mozarilla", 30.0f, true));
+        mealsModels.add(new MealsModel("Hot Dog Crepe", "Hot Dog, Mozarilla", 30.0f, true));
+        mealsModels.add(new MealsModel("Hot Dog Crepe", "Hot Dog, Mozarilla", 30.0f, true));
         restaurantModel = new RestaurantModel("Food Corner", "Crepe, Sandwiches", mealsModels);
     }
 

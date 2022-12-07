@@ -31,4 +31,34 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="PrimaryText">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SecondaryText">
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="price">
+        <item name="android:textColor">@color/orange</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="available">
+        <item name="android:textColor">@color/green</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    
+    <style name="outlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/green</item>
+        <item name="cornerRadius">5dp</item>
+        <item name="android:textColor">@color/green </item>
+        
+    </style>
+
 </resources>

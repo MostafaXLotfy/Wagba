@@ -5,11 +5,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.example.wagba.Basket.BasketModel;
 import com.example.wagba.Basket.orderItems.OrderItemsModel;
 import com.example.wagba.Basket.orderItems.OrdersItemsAdapter;
 import com.example.wagba.databinding.ActivityOrderDetailBinding;
@@ -72,8 +70,8 @@ public class OrderDetailActivity extends AppCompatActivity {
     }
     public void populate_data(){
         binding.tvName.setText(orderDetailModel.getRestaurantName());
-        OrdersItemsAdapter adapter =
-                new OrdersItemsAdapter(orderDetailModel.getOrderItemsModels());
+        OrderDetailItemAdapter adapter = new OrderDetailItemAdapter(
+                orderDetailModel.getOrderItemsModels());
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
         DividerItemDecoration dividerItemDecoration =
