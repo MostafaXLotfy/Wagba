@@ -1,14 +1,17 @@
-package com.example.wagba.Basket;
+package com.example.wagba.OrderDetails;
 
 import com.example.wagba.Basket.orderItems.OrderItemsModel;
-import com.example.wagba.OrderDetails.PaymentModel;
 
 import java.util.ArrayList;
 
-public class BasketModel {
+public class OrderDetailModel {
     private String RestaurantName;
     private ArrayList<OrderItemsModel> orderItemsModels;
     private PaymentModel paymentModel;
+
+    private String deliveryLocation;
+    private String Name;
+    private String phoneNumber;
 
 
     public String getRestaurantName() {
@@ -40,10 +43,26 @@ public class BasketModel {
         return String.format(Float.toString(total), "EGP");
     }
 
-    public BasketModel(
+    public String getDeliveryLocation() {
+        return deliveryLocation;
+    }
+
+
+    public String getName() {
+        return Name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public OrderDetailModel(
             String restaurantName,
             float deliveryFees,
-            ArrayList<OrderItemsModel> orderItemsModels
+            ArrayList<OrderItemsModel> orderItemsModels,
+            String Name,
+            String PhoneNumber,
+            String deliveryLocation
     ) {
         RestaurantName = restaurantName;
         this.orderItemsModels = orderItemsModels;
@@ -54,5 +73,9 @@ public class BasketModel {
             subTotal += model.getTotalPrice();
         }
         paymentModel = new PaymentModel(subTotal, deliveryFees);
+        this.Name = Name;
+        this.deliveryLocation = deliveryLocation;
+        this.phoneNumber = PhoneNumber;
+
     }
 }

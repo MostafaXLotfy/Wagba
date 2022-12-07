@@ -96,7 +96,7 @@ public class BasketFragment extends Fragment {
     public void populate_data(){
         binding.tvName.setText(basketModel.getRestaurantName());
         OrdersItemsAdapter adapter =
-                new OrdersItemsAdapter(basketModel.getOrderDetailsModels());
+                new OrdersItemsAdapter(basketModel.getOrderItemsModels());
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
 
         DividerItemDecoration dividerItemDecoration =

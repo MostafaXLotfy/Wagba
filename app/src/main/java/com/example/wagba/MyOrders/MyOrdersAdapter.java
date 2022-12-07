@@ -1,12 +1,14 @@
 package com.example.wagba.MyOrders;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wagba.OrderDetails.OrderDetailActivity;
 import com.example.wagba.databinding.MyOrdersItemBinding;
 import com.example.wagba.databinding.OrderItemsItemBinding;
 
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 
 public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHolder> {
     ArrayList<MyOrdersModel> myOrdersModels;
+    Intent intent;
     public MyOrdersAdapter(ArrayList<MyOrdersModel> myOrdersModels) {
         this.myOrdersModels = myOrdersModels;
     }
@@ -24,6 +27,7 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         MyOrdersItemBinding binding = MyOrdersItemBinding.inflate(inflater, parent, false);
+        intent = new Intent(context, OrderDetailActivity.class);
         ViewHolder viewHolder = new ViewHolder(binding);
         return viewHolder;
     }
@@ -35,6 +39,9 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
         holder.binding.tvPrice.setText(myOrdersModel.getPrice());
         holder.binding.tvQuantity.setText(myOrdersModel.getQuantity());
         holder.binding.tvDate.setText(myOrdersModel.getDate());
+        holder.binding.getRoot().setOnClickListener(view ->{
+            view.getContext().startActivity(intent);
+        });
     }
 
     @Override

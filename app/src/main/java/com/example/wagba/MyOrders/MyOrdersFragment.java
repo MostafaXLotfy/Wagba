@@ -1,4 +1,4 @@
-package com.example.wagba.Orders;
+package com.example.wagba.MyOrders;
 
 import android.os.Bundle;
 
@@ -12,26 +12,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.wagba.databinding.FragmentOrdersBinding;
+import com.example.wagba.databinding.FragmentMyOrdersBinding;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link OrdersFragment#newInstance} factory method to
+ * Use the {@link MyOrdersFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class OrdersFragment extends Fragment {
+public class MyOrdersFragment extends Fragment {
 
-    FragmentOrdersBinding binding;
-    ArrayList<OrdersModel> ordersModels;
-    public OrdersFragment() {
+    FragmentMyOrdersBinding binding;
+    ArrayList<MyOrdersModel> myOrdersModels;
+    public MyOrdersFragment() {
         // Required empty public constructor
     }
 
-    public static OrdersFragment newInstance() {
-        OrdersFragment fragment = new OrdersFragment();
+    public static MyOrdersFragment newInstance() {
+        MyOrdersFragment fragment = new MyOrdersFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -48,7 +48,7 @@ public class OrdersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding =  FragmentOrdersBinding.inflate(inflater, container, false);
+        binding =  FragmentMyOrdersBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         return view;
     }
@@ -56,18 +56,18 @@ public class OrdersFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ordersModels = new ArrayList<>();
-        ordersModels.add(new OrdersModel("Food Corner", 2, new Date(), 53.0f));
-        ordersModels.add(new OrdersModel("Pizza Hut", 3, new Date(), 100.0f));
-        ordersModels.add(new OrdersModel("Papa Jones", 2, new Date(), 120.0f));
-        ordersModels.add(new OrdersModel("Karam El-Sham", 2, new Date(), 53.0f));
-        OrdersAdapter ordersAdapter = new OrdersAdapter(ordersModels);
+        myOrdersModels = new ArrayList<>();
+        myOrdersModels.add(new MyOrdersModel("Food Corner", 2, new Date(), 53.0f));
+        myOrdersModels.add(new MyOrdersModel("Pizza Hut", 3, new Date(), 100.0f));
+        myOrdersModels.add(new MyOrdersModel("Papa Jones", 2, new Date(), 120.0f));
+        myOrdersModels.add(new MyOrdersModel("Karam El-Sham", 2, new Date(), 53.0f));
+        MyOrdersAdapter myOrdersAdapter = new MyOrdersAdapter(myOrdersModels);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
 
         DividerItemDecoration dividerItemDecoration =
                 new DividerItemDecoration(view.getContext(),layoutManager.getOrientation());
 
-        binding.rcOrders.setAdapter(ordersAdapter);
+        binding.rcOrders.setAdapter(myOrdersAdapter);
         binding.rcOrders.setLayoutManager(layoutManager);
         binding.rcOrders.addItemDecoration(dividerItemDecoration);
 
