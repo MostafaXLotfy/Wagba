@@ -24,7 +24,7 @@
             app:cardUseCompatPadding="true"
 
 
-            app:layout_constraintBottom_toTopOf="@id/cv_bottom"
+            app:layout_constraintBottom_toTopOf="@id/cv_middle"
             app:layout_constraintEnd_toEndOf="parent"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +100,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cv_bottom"
+            android:id="@+id/cv_middle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="2dp"
