@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    style="@style/Theme.Wagba.NoActionBar.CardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <moe.feng.common.stepperview.VerticalStepperItemView
+            android:id="@+id/stepper_0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:step_index="1"
+            app:step_state="selected"
+            app:step_summary=""
+            app:step_summary_done="Summarized if needed. Done"
+            app:step_title="Ordered" />
+
+        <moe.feng.common.stepperview.VerticalStepperItemView
+            android:id="@+id/stepper_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            app:step_index="2"
+            app:step_summary="Your order is accepted"
+            app:step_summary_done="Summarized if needed. Done"
+            app:step_title="Accepted" />
+
+        <moe.feng.common.stepperview.VerticalStepperItemView
+            android:id="@+id/stepper_s3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            app:step_index="3"
+            app:step_summary="Your order is being prepared"
+            app:step_summary_done="Summarized if needed. Done"
+            app:step_title="Preparing" />
+
+        <moe.feng.common.stepperview.VerticalStepperItemView
+            android:id="@+id/stepper_s4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            app:step_index="4"
+            app:step_summary="Your order is on the way"
+            app:step_summary_done="Summarized if needed. Done"
+            app:step_title="Delivering" />
+
+        <moe.feng.common.stepperview.VerticalStepperItemView
+            android:id="@+id/stepper_s5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            app:step_index="5"
+            app:step_is_last="true"
+            app:step_summary="Summarized if needed"
+            app:step_summary_done="Summarized if needed. Done"
+            app:step_title="Delivered" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.cardview.widget.CardView>

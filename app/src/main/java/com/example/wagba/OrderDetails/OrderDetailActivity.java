@@ -1,22 +1,30 @@
 package com.example.wagba.OrderDetails;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.wagba.Basket.orderItems.OrderItemsModel;
-import com.example.wagba.Basket.orderItems.OrdersItemsAdapter;
 import com.example.wagba.databinding.ActivityOrderDetailBinding;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class OrderDetailActivity extends AppCompatActivity {
+    static final ArrayList<String> trackingStatus = new ArrayList<>(Arrays.asList(
+            "Ordered",
+            "Accepted",
+            "Preparing",
+            "Delivering",
+            "Delivered"
+    ));
     OrderDetailModel orderDetailModel;
     ActivityOrderDetailBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +37,7 @@ public class OrderDetailActivity extends AppCompatActivity {
 
     }
 
-    public void init_data(){
+    public void init_data() {
 
         String restaurantName = "Food Corner";
         ArrayList<OrderItemsModel> orderItemsModels = new ArrayList<>();
@@ -63,31 +71,32 @@ public class OrderDetailActivity extends AppCompatActivity {
 
 
         orderDetailModel = new OrderDetailModel(restaurantName,
-                deliveryFees, orderItemsModels,  name, phoneNumber, deliveryLocation);
+                deliveryFees, orderItemsModels, name, phoneNumber, deliveryLocation);
     }
 
-    public void populate_fields(){
+    public void populate_fields() {
     }
-    public void populate_data(){
+
+    public void populate_data() {
         binding.tvName.setText(orderDetailModel.getRestaurantName());
         OrderDetailItemAdapter adapter = new OrderDetailItemAdapter(
                 orderDetailModel.getOrderItemsModels());
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
         DividerItemDecoration dividerItemDecoration =
-                new DividerItemDecoration(this,layoutManager.getOrientation());
+                new DividerItemDecoration(this, layoutManager.getOrientation());
 
-        binding.rcOrderDetails.setAdapter(adapter);
-        binding.rcOrderDetails.setLayoutManager(layoutManager);
-        binding.rcOrderDetails.addItemDecoration(dividerItemDecoration);
+        binding.cvDetails.rcOrderDetails.setAdapter(adapter);
+        binding.cvDetails.rcOrderDetails.setLayoutManager(layoutManager);
+        binding.cvDetails.rcOrderDetails.addItemDecoration(dividerItemDecoration);
 
-        binding.tvSubtotalAmount.setText(orderDetailModel.getSubTotal());
-        binding.tvTotalAmount.setText(orderDetailModel.getTotal());
-        binding.tvTaxAmount.setText(orderDetailModel.getTax());
-        binding.tvDeliveryAmount.setText(orderDetailModel.getDeliveryFees());
+        binding.cvPayment.tvSubtotalAmount.setText(orderDetailModel.getSubTotal());
+        binding.cvPayment.tvTotalAmount.setText(orderDetailModel.getTotal());
+        binding.cvPayment.tvTaxAmount.setText(orderDetailModel.getTax());
+        binding.cvPayment.tvDeliveryAmount.setText(orderDetailModel.getDeliveryFees());
+
 
     }
-
 
 
     @Override

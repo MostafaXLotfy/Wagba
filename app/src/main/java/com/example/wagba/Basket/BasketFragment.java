@@ -105,12 +105,12 @@ public class BasketFragment extends Fragment {
         binding.rcOrderDetails.setAdapter(adapter);
         binding.rcOrderDetails.setLayoutManager(layoutManager);
         binding.rcOrderDetails.addItemDecoration(dividerItemDecoration);
-
-        binding.tvSubtotalAmount.setText(basketModel.getSubTotal());
-        binding.tvTotalAmount.setText(basketModel.getTotal());
-        binding.tvTaxAmount.setText(basketModel.getTax());
-        binding.tvDeliveryAmount.setText(basketModel.getDeliveryFees());
+        binding.cvPayment.tvSubtotalAmount.setText(basketModel.getSubTotal());
+        binding.cvPayment.tvTotalAmount.setText(basketModel.getTotal());
+        binding.cvPayment.tvTaxAmount.setText(basketModel.getTax());
+        binding.cvPayment.tvDeliveryAmount.setText(basketModel.getDeliveryFees());
     }
+
 
     @Override
     public void onDestroyView() {

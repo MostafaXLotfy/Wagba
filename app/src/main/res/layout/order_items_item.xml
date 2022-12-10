@@ -67,32 +67,30 @@
         app:layout_constraintStart_toStartOf="@id/tv_name"
 
         app:layout_constraintHorizontal_bias="0.0"
-        style="@style/outlinedButton"
+        android:backgroundTint="@color/orange"
         app:layout_constraintHorizontal_chainStyle="packed"
         android:layout_marginEnd="5dp"
         />
 
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_remove"
-
+        android:backgroundTint="@color/orange"
         android:layout_width="48dp"
-        android:layout_height="48dp"
 
+
+        android:layout_height="48dp"
 
         android:text="@string/mines"
 
-        app:layout_constraintTop_toTopOf="@id/btn_add"
         app:layout_constraintBottom_toBottomOf="@id/btn_add"
-
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_add"
 
         app:layout_constraintHorizontal_bias="0.0"
-        style="@style/outlinedButton"
-        android:textColor="@color/red"
-        app:strokeColor="@color/red"
+        app:layout_constraintStart_toEndOf="@id/btn_add"
+        app:layout_constraintTop_toTopOf="@id/btn_add"
+        app:layout_constraintVertical_bias="0.0"
         />
-
 
     <TextView
         android:id="@+id/tv_price"

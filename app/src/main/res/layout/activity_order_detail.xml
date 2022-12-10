@@ -33,52 +33,49 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/iv_image"
+                    style="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="20dp"
 
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp"
                     android:src="@drawable/pizza_hut_logo"
                     app:layout_constraintBottom_toBottomOf="@id/tv_name"
-                    app:layout_constraintEnd_toStartOf="@id/tv_orders_from"
 
+                    app:layout_constraintEnd_toStartOf="@id/tv_orders_from"
                     app:layout_constraintHorizontal_bias="0.1"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    style="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_orders_from"
+                    style="@style/SecondaryText"
                     android:layout_width="0dp"
+
                     android:layout_height="wrap_content"
 
                     android:text="@string/your_order_from"
-
                     app:layout_constraintBottom_toTopOf="@id/tv_name"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_image"
                     app:layout_constraintTop_toTopOf="@id/iv_image"
-                    app:layout_constraintVertical_chainStyle="packed"
-                    style="@style/SecondaryText"
-                    />
+                    app:layout_constraintVertical_chainStyle="packed" />
 
                 <TextView
                     android:id="@+id/tv_name"
+                    style="@style/PrimaryText"
                     android:layout_width="wrap_content"
+
                     android:layout_height="0dp"
 
                     android:text="@string/name_placeholder"
-
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/tv_orders_from"
 
+                    app:layout_constraintEnd_toEndOf="@id/tv_orders_from"
                     app:layout_constraintStart_toStartOf="@id/tv_orders_from"
-                    app:layout_constraintTop_toBottomOf="@id/tv_orders_from"
-                    style="@style/PrimaryText"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/tv_orders_from" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -100,13 +97,14 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="5dp"
+                >
 
                 <TextView
                     android:id="@+id/tv_customer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:text="Mostafa Lotfy" />
 
@@ -114,7 +112,6 @@
                     android:id="@+id/tv_delivery_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
                     android:drawableLeft="@drawable/ic_baseline_location_on_24"
                     android:text="Gate 3" />
@@ -122,7 +119,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
                     android:drawableLeft="@drawable/ic_baseline_phone_24"
                     android:text="0111xxxxxxx"
@@ -134,144 +130,20 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/frag_order_details"
+        <include
+            android:id="@+id/cv_details"
+            layout="@layout/card_order_details"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="2dp"
-            app:cardMaxElevation="12dp"
-            app:cardPreventCornerOverlap="true"
-            app:cardUseCompatPadding="true">
+            android:layout_height="match_parent" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rc_order_details"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/order_detail_item" />
-        </androidx.cardview.widget.CardView>
+        <include
+            android:id="@+id/cv_tracking"
+            layout="@layout/tracking_card" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/frag_payment_details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="2dp"
-            app:cardMaxElevation="12dp"
-            app:cardPreventCornerOverlap="true"
-            app:cardUseCompatPadding="true">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/tv_payment_details"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/payment_details"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.051"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_subtotal"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:text="@string/subtotal"
-                    app:layout_constraintBottom_toTopOf="@id/tv_tax"
-                    app:layout_constraintEnd_toStartOf="@id/tv_subtotal_amount"
-                    app:layout_constraintHorizontal_bias="0.43"
-                    app:layout_constraintStart_toStartOf="@id/tv_payment_details"
-                    app:layout_constraintTop_toBottomOf="@id/tv_payment_details" />
-
-                <TextView
-                    android:id="@+id/tv_subtotal_amount"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:gravity="end"
-                    android:text="@string/subtotal"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_subtotal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tv_subtotal"
-                    app:layout_constraintTop_toTopOf="@id/tv_subtotal" />
-
-                <TextView
-                    android:id="@+id/tv_tax"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:text="@string/Tax"
-                    app:layout_constraintBottom_toTopOf="@id/tv_tax"
-                    app:layout_constraintEnd_toStartOf="@id/tv_tax_amount"
-
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@id/tv_payment_details"
-                    app:layout_constraintTop_toBottomOf="@id/tv_subtotal" />
-
-                <TextView
-                    android:id="@+id/tv_tax_amount"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:text="@string/subtotal"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_tax"
-                    app:layout_constraintEnd_toEndOf="@id/tv_subtotal_amount"
-                    app:layout_constraintStart_toEndOf="@id/tv_tax"
-                    app:layout_constraintTop_toTopOf="@id/tv_tax" />
-
-                <TextView
-                    android:id="@+id/tv_delivery"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:text="@string/delivery_fees"
-                    app:layout_constraintEnd_toStartOf="@id/tv_delivery_amount"
-                    app:layout_constraintStart_toStartOf="@id/tv_payment_details"
-                    app:layout_constraintTop_toBottomOf="@id/tv_tax" />
-
-                <TextView
-                    android:id="@+id/tv_delivery_amount"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:text="@string/subtotal"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_delivery"
-                    app:layout_constraintEnd_toEndOf="@id/tv_subtotal_amount"
-                    app:layout_constraintStart_toEndOf="@id/tv_delivery"
-                    app:layout_constraintTop_toTopOf="@id/tv_delivery" />
-
-                <TextView
-                    android:id="@+id/tv_total"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/total"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/tv_total_amount"
-                    app:layout_constraintStart_toStartOf="@id/tv_payment_details"
-                    app:layout_constraintTop_toBottomOf="@id/tv_delivery" />
-
-                <TextView
-                    android:id="@+id/tv_total_amount"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:text="@string/subtotal"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_total"
-                    app:layout_constraintEnd_toEndOf="@id/tv_subtotal_amount"
-                    app:layout_constraintStart_toEndOf="@id/tv_total"
-
-                    app:layout_constraintTop_toTopOf="@id/tv_total" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
+        <include
+            android:id="@+id/cv_payment"
+            layout="@layout/payment_card" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

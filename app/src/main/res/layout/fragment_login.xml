@@ -68,7 +68,8 @@
             app:layout_constraintEnd_toStartOf="@+id/btn_register"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/btn_register"
-            android:textSize="20sp"
+            android:textSize="18sp"
+            android:backgroundTint="@color/orange"
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
@@ -81,7 +82,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cb_rememberMe"
             app:layout_constraintStart_toEndOf="@id/btn_login"
-            android:textSize="20sp"
+            android:textSize="18sp"
+            android:backgroundTint="@color/orange"
             android:layout_marginEnd="20dp"
             />
         <CheckBox
@@ -90,7 +92,7 @@
             android:layout_marginStart="20dp"
             android:text="@string/remember_me"
             app:layout_constraintTop_toBottomOf="@id/et_password"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/et_email"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/btn_register"
             android:textSize="20sp"
