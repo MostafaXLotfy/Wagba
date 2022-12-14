@@ -132,7 +132,7 @@
 
         <include
             android:id="@+id/cv_details"
-            layout="@layout/card_order_details"
+            layout="@layout/order_details_card"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

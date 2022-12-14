@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wagba.databinding.OrderItemsItemBinding;
+import com.example.wagba.databinding.BasketOrderItemBinding;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class OrdersItemsAdapter extends RecyclerView.Adapter<OrdersItemsAdapter.
     public OrdersItemsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        OrderItemsItemBinding binding = OrderItemsItemBinding.inflate(inflater,
+        BasketOrderItemBinding binding = BasketOrderItemBinding.inflate(inflater,
                 parent, false);
         ViewHolder viewHolder = new ViewHolder(binding);
         return viewHolder;
@@ -43,11 +43,12 @@ public class OrdersItemsAdapter extends RecyclerView.Adapter<OrdersItemsAdapter.
         return orderItemsModels.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        OrderItemsItemBinding binding;
-        public ViewHolder(@NonNull OrderItemsItemBinding binding) {
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        BasketOrderItemBinding binding;
+
+        public ViewHolder(@NonNull BasketOrderItemBinding binding) {
             super(binding.getRoot());
-            this.binding  = binding;
+            this.binding = binding;
         }
     }
 }

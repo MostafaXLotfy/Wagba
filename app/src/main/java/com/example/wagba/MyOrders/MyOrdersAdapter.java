@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wagba.OrderDetails.OrderDetailActivity;
 import com.example.wagba.databinding.MyOrdersItemBinding;
-import com.example.wagba.databinding.OrderItemsItemBinding;
 
 import java.util.ArrayList;
 
