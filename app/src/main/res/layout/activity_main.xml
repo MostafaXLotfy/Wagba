@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:paddingTop="20dp"
+    >
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcv_search"
@@ -26,7 +28,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fcv_search"
-        tools:layout="@layout/fragment_login"
+        tools:layout="@layout/fragment_restaurants"
         />
 
     <androidx.fragment.app.FragmentContainerView

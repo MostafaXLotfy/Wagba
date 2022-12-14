@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Basket.BasketFragment">
+    tools:context=".Basket.BasketFragment"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -13,7 +14,10 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            >
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/frag_order_restaurant"
@@ -122,7 +126,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/order_items_item" />
+                    tools:listitem="@layout/basket_order_item" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -159,6 +163,16 @@
             <include
                 android:id="@+id/cv_payment"
                 layout="@layout/payment_card" />
+            
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:text="@string/order"
+                android:textSize="18sp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:backgroundTint="@color/orange"
+                />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
