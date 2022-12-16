@@ -10,6 +10,6 @@ public class Constant {
     public static final String BASKET_FRAG_TAG = "BASKET";
     public static final String RESTAURANTS_FRAG_TAG = "RESTAURANTS";
 
-    public static final String RESTAURANT_ID = "RESTAURANT_ID";
+    public static final String RESTAURANT_ID = "restaurantID";
     public static final String RESTAURANT_DATA = "RESTAURANT_DATA";
 }

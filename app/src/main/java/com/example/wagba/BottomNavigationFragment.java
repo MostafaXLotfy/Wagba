@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.wagba.Basket.BasketFragment;
-import com.example.wagba.MyOrders.MyOrdersFragment;
+import com.example.wagba.View.OrdersFragment;
 import com.example.wagba.View.RestaurantsFragment;
 import com.example.wagba.databinding.FragmentBottomNavigationBinding;
 import com.example.wagba.utils.Constant;
@@ -85,13 +85,13 @@ public class BottomNavigationFragment extends Fragment {
                 activeFragment = restaurantsFragment;
                 return true;
             } else if (itemId == R.id.orders) {
-                MyOrdersFragment myOrdersFragment = (MyOrdersFragment)
+                OrdersFragment ordersFragment = (OrdersFragment)
                         fm.findFragmentByTag(Constant.MY_ORDERS_FRAG_TAG);
                 fm.beginTransaction()
                         .hide(activeFragment)
-                        .show(Objects.requireNonNull(myOrdersFragment))
+                        .show(Objects.requireNonNull(ordersFragment))
                         .commit();
-                activeFragment = myOrdersFragment;
+                activeFragment = ordersFragment;
                 return true;
             }
             return false;
@@ -100,7 +100,7 @@ public class BottomNavigationFragment extends Fragment {
 
     void init() {
         BasketFragment basketFragment = BasketFragment.newInstance();
-        MyOrdersFragment myOrderFragment = MyOrdersFragment.newInstance();
+        OrdersFragment myOrderFragment = OrdersFragment.newInstance();
         activeFragment = RestaurantsFragment.newInstance();
         FragmentManager fm = activity.getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();

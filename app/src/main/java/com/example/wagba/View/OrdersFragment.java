@@ -1,10 +1,13 @@
-package com.example.wagba.MyOrders;
+package com.example.wagba.View;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -12,26 +15,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.wagba.adapter.MyOrdersAdapter;
 import com.example.wagba.databinding.FragmentMyOrdersBinding;
+import com.example.wagba.model.Order;
+import com.example.wagba.viewModel.OrdersViewModel;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MyOrdersFragment#newInstance} factory method to
+ * Use the {@link OrdersFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MyOrdersFragment extends Fragment {
+public class OrdersFragment extends Fragment {
 
     FragmentMyOrdersBinding binding;
-    ArrayList<MyOrdersModel> myOrdersModels;
-    public MyOrdersFragment() {
+    OrdersViewModel viewModel;
+    public OrdersFragment() {
         // Required empty public constructor
     }
 
-    public static MyOrdersFragment newInstance() {
-        MyOrdersFragment fragment = new MyOrdersFragment();
+    public static OrdersFragment newInstance() {
+        OrdersFragment fragment = new OrdersFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -40,8 +47,6 @@ public class MyOrdersFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     @Override
@@ -56,12 +61,13 @@ public class MyOrdersFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        myOrdersModels = new ArrayList<>();
-        myOrdersModels.add(new MyOrdersModel("Food Corner", 2, new Date(), 53.0f));
-        myOrdersModels.add(new MyOrdersModel("Pizza Hut", 3, new Date(), 100.0f));
-        myOrdersModels.add(new MyOrdersModel("Papa Jones", 2, new Date(), 120.0f));
-        myOrdersModels.add(new MyOrdersModel("Karam El-Sham", 2, new Date(), 53.0f));
-        MyOrdersAdapter myOrdersAdapter = new MyOrdersAdapter(myOrdersModels);
+        viewModel = ViewModelProvider.AndroidViewModelFactory
+                .getInstance(requireActivity().getApplication()).create(OrdersViewModel.class);
+        LiveData<List<Order>> ordersLiveData = viewModel.getAllOrders();
+        MyOrdersAdapter myOrdersAdapter = new MyOrdersAdapter(ordersLiveData.getValue());
+        ordersLiveData.observe(requireActivity(), orders -> {
+            myOrdersAdapter.notifyDataSetChanged();
+        });
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
 
         DividerItemDecoration dividerItemDecoration =

@@ -1,4 +1,4 @@
-package com.example.wagba.MyOrders;
+package com.example.wagba.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,14 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wagba.OrderDetails.OrderDetailActivity;
 import com.example.wagba.databinding.MyOrdersItemBinding;
+import com.example.wagba.model.Order;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHolder> {
-    ArrayList<MyOrdersModel> myOrdersModels;
+    List<Order> orders;
     Intent intent;
-    public MyOrdersAdapter(ArrayList<MyOrdersModel> myOrdersModels) {
-        this.myOrdersModels = myOrdersModels;
+    public MyOrdersAdapter(List<Order> orders) {
+        this.orders = orders;
     }
 
     @NonNull
@@ -33,11 +35,11 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyOrdersAdapter.ViewHolder holder, int position) {
-        MyOrdersModel myOrdersModel = myOrdersModels.get(position);
-        holder.binding.tvName.setText(myOrdersModel.getRestaurantName());
-        holder.binding.tvPrice.setText(myOrdersModel.getPrice());
-        holder.binding.tvQuantity.setText(myOrdersModel.getQuantity());
-        holder.binding.tvDate.setText(myOrdersModel.getDate());
+        Order order = orders.get(position);
+        holder.binding.tvName.setText(order.getRestaurantName());
+        holder.binding.tvPrice.setText(order.getPrice());
+        holder.binding.tvQuantity.setText(order.getQuantity());
+        holder.binding.tvDate.setText(order.getDate());
         holder.binding.getRoot().setOnClickListener(view ->{
             view.getContext().startActivity(intent);
         });
@@ -45,7 +47,7 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return myOrdersModels.size();
+        return orders.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
