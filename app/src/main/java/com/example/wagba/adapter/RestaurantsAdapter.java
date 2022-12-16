@@ -1,9 +1,8 @@
-package com.example.wagba.Restaurants;
+package com.example.wagba.adapter;
 
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -11,13 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wagba.Restaurant.RestaurantActivity;
 import com.example.wagba.databinding.RestaurantsItemBinding;
+import com.example.wagba.model.RestaurantModel;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.ViewHolder>{
-    ArrayList<RestaurantsModel> restaurantsModels;
+    List<RestaurantModel> restaurantsModels;
 
-    public RestaurantsAdapter(ArrayList<RestaurantsModel> restaurantsModels){
+    public RestaurantsAdapter(List<RestaurantModel> restaurantsModels){
         this.restaurantsModels  = restaurantsModels;
     }
 
@@ -33,7 +33,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        RestaurantsModel restaurantsModel = restaurantsModels.get(position);
+        RestaurantModel restaurantsModel = restaurantsModels.get(position);
         holder.binding.tvName.setText(restaurantsModel.getName());
         holder.binding.tvDescription.setText(restaurantsModel.getDescription());
         holder.binding.getRoot().setOnClickListener(view ->{
@@ -43,10 +43,12 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         });
     }
 
+
     @Override
     public int getItemCount() {
-        return restaurantsModels.size();
+       return restaurantsModels.size();
     }
+
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         RestaurantsItemBinding binding;

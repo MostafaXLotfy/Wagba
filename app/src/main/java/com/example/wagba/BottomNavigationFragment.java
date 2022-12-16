@@ -13,8 +13,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.wagba.Basket.BasketFragment;
 import com.example.wagba.MyOrders.MyOrdersFragment;
-import com.example.wagba.Restaurants.RestaurantsFragment;
-import com.example.wagba.databinding.FragmentBottomNavigationBinding;
+import com.example.wagba.View.RestaurantsFragment;
+import com.example.wagba.utils.Constant;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,10 +26,7 @@ import com.example.wagba.databinding.FragmentBottomNavigationBinding;
 public class BottomNavigationFragment extends Fragment {
 
     FragmentBottomNavigationBinding binding;
-    MyOrdersFragment myOrdersFragment;
-    BasketFragment basketFragment;
-    RestaurantsFragment restaurantsFragment;
-    SearchFragment searchFragment;
+    Fragment activeFragment;
     MainActivity activity;
 
     public BottomNavigationFragment() {
@@ -47,10 +46,6 @@ public class BottomNavigationFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
-        basketFragment = BasketFragment.newInstance();
-        myOrdersFragment = MyOrdersFragment.newInstance();
-        restaurantsFragment = RestaurantsFragment.newInstance();
-        searchFragment = SearchFragment.newInstance();
     }
 
     @Override
@@ -65,29 +60,58 @@ public class BottomNavigationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        init();
+        FragmentManager fm = activity.getSupportFragmentManager();
+
         //todo:: refactor
         binding.fcvNavigation.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.cart) {
-                replaceContentFragment(R.id.fcv_content, basketFragment);
+                BasketFragment basketFragment = (BasketFragment)
+                        fm.findFragmentByTag(Constant.BASKET_FRAG_TAG);
+                fm.beginTransaction().hide(activeFragment).
+                        show(Objects.requireNonNull(basketFragment)).commit();
+                activeFragment = basketFragment;
                 return true;
             } else if (itemId == R.id.restaurants) {
-                replaceContentFragment(R.id.fcv_content, restaurantsFragment);
+                RestaurantsFragment restaurantsFragment = (RestaurantsFragment)
+                        fm.findFragmentByTag(Constant.RESTAURANTS_FRAG_TAG);
+                fm.beginTransaction().
+                        hide(activeFragment)
+                        .show(Objects.requireNonNull(restaurantsFragment))
+                        .commit();
+                activeFragment = restaurantsFragment;
                 return true;
             } else if (itemId == R.id.orders) {
-                    replaceContentFragment(R.id.fcv_content, myOrdersFragment);
+                MyOrdersFragment myOrdersFragment = (MyOrdersFragment)
+                        fm.findFragmentByTag(Constant.MY_ORDERS_FRAG_TAG);
+                fm.beginTransaction()
+                        .hide(activeFragment)
+                        .show(Objects.requireNonNull(myOrdersFragment))
+                        .commit();
+                activeFragment = myOrdersFragment;
                 return true;
             }
             return false;
         });
     }
 
-    private void replaceContentFragment(int containerID, Fragment fragment ){
+    void init() {
+        BasketFragment basketFragment = BasketFragment.newInstance();
+        MyOrdersFragment myOrderFragment = MyOrdersFragment.newInstance();
+        activeFragment = RestaurantsFragment.newInstance();
         FragmentManager fm = activity.getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(containerID, fragment);
-        ft.commit() ;
+
+        ft.add(R.id.fcv_content, basketFragment, Constant.BASKET_FRAG_TAG)
+                .hide(basketFragment);
+        ft.add(R.id.fcv_content, myOrderFragment, Constant.MY_ORDERS_FRAG_TAG)
+                .hide(myOrderFragment);
+        ft.add(R.id.fcv_content, activeFragment, Constant.RESTAURANTS_FRAG_TAG);
+        ft.commit();
     }
+
 
     @Override
     public void onDestroyView() {
