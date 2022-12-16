@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.example.wagba.Restaurant.Meals.MealsModel;
+import com.example.wagba.model.MealsModel;
 import com.example.wagba.databinding.ActivityMealBinding;
 
 public class MealActivity extends AppCompatActivity {

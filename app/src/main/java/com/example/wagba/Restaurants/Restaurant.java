@@ -1,12 +1,10 @@
 package com.example.wagba.Restaurants;
 
-import android.graphics.drawable.Drawable;
-
-public class RestaurantsModel {
+public class Restaurant {
     private String name;
     private String description;
 
-    public RestaurantsModel(String name, String description){
+    public Restaurant(String name, String description){
         this.description = description;
         this.name = name;
     }

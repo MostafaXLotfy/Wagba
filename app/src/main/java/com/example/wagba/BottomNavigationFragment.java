@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.wagba.Basket.BasketFragment;
 import com.example.wagba.MyOrders.MyOrdersFragment;
 import com.example.wagba.View.RestaurantsFragment;
+import com.example.wagba.databinding.FragmentBottomNavigationBinding;
 import com.example.wagba.utils.Constant;
 
 import java.util.Objects;

@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wagba.Restaurant.RestaurantActivity;
+import com.example.wagba.View.RestaurantActivity;
 import com.example.wagba.databinding.RestaurantsItemBinding;
 import com.example.wagba.model.RestaurantModel;
+import com.example.wagba.utils.Constant;
 
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         holder.binding.getRoot().setOnClickListener(view ->{
             Context context = view.getContext();
             Intent intent = new Intent(context, RestaurantActivity.class);
+            intent.putExtra(Constant.RESTAURANT_DATA, restaurantsModel);
             context.startActivity(intent);
         });
     }

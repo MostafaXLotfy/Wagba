@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.wagba.model.MealsModel;
 import com.example.wagba.model.RestaurantModel;
 import com.example.wagba.utils.Constant;
 import com.google.firebase.database.ChildEventListener;
@@ -18,33 +19,33 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class RestaurantsRepository {
-    private static final String  TAG = "RestaurantsRepository";
-    private DatabaseReference restaurantsRef;
-    private List<RestaurantModel> _allRestaurants;
-    private MutableLiveData<List<RestaurantModel>> _allRestaurantsLiveData;
+public class RestaurantsMealsRepository {
+    private static final String TAG = "RestaurantsMealsRepo";
+    DatabaseReference mealRef;
+    List<MealsModel> _restaurantsMeals;
+    MutableLiveData<List<MealsModel>> _mealsModelLiveData;
 
-    public RestaurantsRepository(Application application) {
-        restaurantsRef = FirebaseDatabase.getInstance().
-                getReference(Constant.RESTAURANTS_END_POINT);
-        _allRestaurants = new ArrayList<>();
-        _allRestaurantsLiveData = new MutableLiveData<>(_allRestaurants);
-        getData();
+    public RestaurantsMealsRepository(Application application){
     }
 
-    private void getData() {
-        restaurantsRef.addChildEventListener(new ChildEventListener() {
+    private void getData(String restaurantID){
+        _restaurantsMeals = new ArrayList<>();
+        _mealsModelLiveData = new MutableLiveData<>(_restaurantsMeals);
+        mealRef = FirebaseDatabase.getInstance()
+                .getReference(Constant.MEALS_END_POINT).child(restaurantID);
+
+        mealRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot,
-                                     @Nullable String previousChildName) {
-                _allRestaurants.add(snapshot.getValue(RestaurantModel.class));
-                _allRestaurantsLiveData.setValue(_allRestaurants);
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                _restaurantsMeals.add(snapshot.getValue(MealsModel.class));
+                _mealsModelLiveData.setValue(_restaurantsMeals);
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
+                //todo:: implement available
             }
 
             @Override
@@ -53,6 +54,7 @@ public class RestaurantsRepository {
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
             }
 
             @Override
@@ -62,9 +64,11 @@ public class RestaurantsRepository {
         });
     }
 
-
-    public LiveData<List<RestaurantModel>> get_allRestaurants() {
-        return _allRestaurantsLiveData;
+    public LiveData<List<MealsModel>> getRestaurant(String restaurantID){
+        if(_mealsModelLiveData == null) {
+            getData(restaurantID);
+        }
+        return _mealsModelLiveData;
     }
 
 }

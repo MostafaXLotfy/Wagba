@@ -1,4 +1,4 @@
-package com.example.wagba.Restaurant.Meals;
+package com.example.wagba.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,19 +8,20 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wagba.MainActivity;
 import com.example.wagba.MealActivity;
-import com.example.wagba.Restaurant.RestaurantActivity;
+import com.example.wagba.model.MealsModel;
+import com.example.wagba.View.RestaurantActivity;
 import com.example.wagba.databinding.MealsItemBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> {
-    private ArrayList<MealsModel> mealsModels;
+    private List<MealsModel> mealsModels;
     RestaurantActivity activity;
     Intent intent;
 
-    public MealsAdapter(ArrayList<MealsModel> mealsModels) {
+    public MealsAdapter(List<MealsModel> mealsModels) {
         this.mealsModels = mealsModels;
     }
 

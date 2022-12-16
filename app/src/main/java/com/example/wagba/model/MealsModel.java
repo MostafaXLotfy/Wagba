@@ -1,10 +1,14 @@
-package com.example.wagba.Restaurant.Meals;
+package com.example.wagba.model;
 
 public class MealsModel {
     private String name;
     private String description;
     private float price;
     private boolean available;
+
+    public MealsModel(){
+
+    }
 
     public MealsModel(String name, String description, float price, boolean available) {
         this.name = name;
