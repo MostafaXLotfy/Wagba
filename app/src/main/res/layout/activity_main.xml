@@ -8,7 +8,7 @@
     android:paddingTop="20dp"
     >
 
-    <androidx.fragment.app.FragmentContainerView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/fcv_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toTopOf="@id/fcv_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout="@layout/fragment_search"
+        app:defaultQueryHint="@string/search_restaurant_or_dish"
         />
 
     <androidx.fragment.app.FragmentContainerView
@@ -31,15 +31,18 @@
         tools:layout="@layout/fragment_restaurants"
         />
 
-    <androidx.fragment.app.FragmentContainerView
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/fcv_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="@drawable/bottom_navigation_selector"
+        app:itemTextColor="@drawable/bottom_navigation_selector"
         app:layout_constraintTop_toBottomOf="@id/fcv_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout="@layout/fragment_bottom_navigation"
         />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

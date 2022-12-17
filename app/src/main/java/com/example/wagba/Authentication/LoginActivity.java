@@ -26,7 +26,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(root);
         auth = FirebaseAuth.getInstance();
 
-//        Intent registerIntent = new Intent(this, SignupActivity.class);
         binding.btnRegister.setOnClickListener(view ->{
             startActivity(new Intent(this, SignupActivity.class));
         });
