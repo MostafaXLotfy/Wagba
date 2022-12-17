@@ -1,21 +1,28 @@
-package com.example.wagba.Authentication;
+package com.example.wagba.View;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.wagba.MainActivity;
 import com.example.wagba.databinding.ActivityLoginBinding;
+import com.example.wagba.model.User;
+import com.example.wagba.viewModel.LoginViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
+    static private final String TAG = "LoginActivity";
     ActivityLoginBinding binding;
     private FirebaseAuth auth;
+    private LoginViewModel _loginViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,8 @@ public class LoginActivity extends AppCompatActivity {
         View root = binding.getRoot();
         setContentView(root);
         auth = FirebaseAuth.getInstance();
+        _loginViewModel = ViewModelProvider.AndroidViewModelFactory
+                .getInstance(getApplication()).create(LoginViewModel.class);
 
         binding.btnRegister.setOnClickListener(view ->{
             startActivity(new Intent(this, SignupActivity.class));
@@ -40,23 +49,28 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login(){
-        String email = binding.etEmail.toString();
+        String email = binding.etEmail.getText().toString();
         if(TextUtils.isEmpty(email)){
             binding.etEmail.setError("Email is Required");
             return;
         }
-        String password = binding.etPassword.toString();
+        String password = binding.etPassword.getText().toString();
         if(TextUtils.isEmpty(password)){
            binding.etPassword.setError("Email is Required");
            return;
         }
-        auth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener(this, actionResult->{
-                    startActivity(new Intent(this, MainActivity.class));
-                }).addOnFailureListener(this, e->{
-                    Toast.makeText(this, "failed to login",
-                            Toast.LENGTH_SHORT).show();
-                });
-
+        _loginViewModel.login(email, password).observe(this, user -> {
+            if(user != null){
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+            }
+        });
+//        auth.signInWithEmailAndPassword(email, password)
+//                .addOnSuccessListener(this, actionResult->{
+//                    startActivity(new Intent(this, MainActivity.class));
+//                }).addOnFailureListener(this, e->{
+//                    Toast.makeText(this, "failed to login",
+//                            Toast.LENGTH_SHORT).show();
+//                });
     }
 }

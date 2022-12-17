@@ -4,17 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.wagba.Authentication.LoginActivity;
-import com.example.wagba.Basket.BasketFragment;
+import com.example.wagba.View.LoginActivity;
+import com.example.wagba.View.BasketFragment;
 import com.example.wagba.View.OrdersFragment;
 import com.example.wagba.View.RestaurantsFragment;
 import com.example.wagba.databinding.ActivityMainBinding;
 import com.example.wagba.utils.Constant;
+import com.example.wagba.viewModel.MainViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -22,7 +25,7 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
-    private FirebaseAuth auth;
+    private MainViewModel _mainViewModel;
     BasketFragment basketFragment = BasketFragment.newInstance();
     OrdersFragment myOrderFragment = OrdersFragment.newInstance();
     RestaurantsFragment restaurantsFragment;
@@ -36,10 +39,11 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        auth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = auth.getCurrentUser();
+        _mainViewModel = ViewModelProvider.AndroidViewModelFactory
+                .getInstance(getApplication()).create(MainViewModel.class);
 
-        if(currentUser == null){
+
+        if(_mainViewModel.getCurrentUser() == null){
             startActivity(new Intent(this, LoginActivity.class));
         }
         init_navigation();

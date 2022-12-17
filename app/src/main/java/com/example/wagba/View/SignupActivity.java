@@ -1,4 +1,4 @@
-package com.example.wagba.Authentication;
+package com.example.wagba.View;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,14 +8,19 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.wagba.MainActivity;
 import com.example.wagba.databinding.ActivitySignupBinding;
+import com.example.wagba.model.User;
+import com.example.wagba.viewModel.SignupViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SignupActivity extends AppCompatActivity {
     ActivitySignupBinding binding;
     private FirebaseAuth auth;
+    private SignupViewModel _signupViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +30,9 @@ public class SignupActivity extends AppCompatActivity {
         View root = binding.getRoot();
         setContentView(root);
         auth = FirebaseAuth.getInstance();
+        _signupViewModel = ViewModelProvider.AndroidViewModelFactory
+                .getInstance(getApplication()).create(SignupViewModel.class);
+
         binding.btnRegister.setOnClickListener(view->{
             signup();
         });
@@ -49,7 +57,7 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         String confirmPassword = binding.etConfirmPassword.getText().toString();
-        if (TextUtils.isEmpty(confirmPassword) || TextUtils.equals(confirmPassword, password)) {
+        if (TextUtils.isEmpty(confirmPassword) || !TextUtils.equals(confirmPassword, password)) {
             binding.etConfirmPassword.setError("Confirm Password must be equal to password");
             return;
         }
@@ -63,16 +71,24 @@ public class SignupActivity extends AppCompatActivity {
             binding.etUsername.setError("username is required");
             return;
         }
-        auth.createUserWithEmailAndPassword(email, password)
-                .addOnSuccessListener(this, authResult -> {
-                    startActivity(new Intent(this, MainActivity.class));
-                    Toast.makeText(this,
-                            "Signup is successful", Toast.LENGTH_SHORT).show();
-                    finish();
-                }).addOnFailureListener(e -> {
-                    Toast.makeText(this,
-                            "Failed To Signup ", Toast.LENGTH_SHORT).show();
-                });
+        // todo:: clean
+        User user = new User("1", username, email, phone, "male");
+        _signupViewModel.signup(user, password).observe(this, user1 -> {
+            if(user1 != null){
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+            }
+        });
+//        auth.createUserWithEmailAndPassword(email, password)
+//                .addOnSuccessListener(this, authResult -> {
+//                    startActivity(new Intent(this, MainActivity.class));
+//                    Toast.makeText(this,
+//                            "Signup is successful", Toast.LENGTH_SHORT).show();
+//                    finish();
+//                }).addOnFailureListener(e -> {
+//                    Toast.makeText(this,
+//                            "Failed To Signup ", Toast.LENGTH_SHORT).show();
+//                });
     }
 
 
