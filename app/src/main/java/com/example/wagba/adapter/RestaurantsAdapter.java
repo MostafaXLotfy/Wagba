@@ -37,6 +37,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         RestaurantModel restaurantsModel = restaurantsModels.get(position);
         holder.binding.tvName.setText(restaurantsModel.getName());
         holder.binding.tvDescription.setText(restaurantsModel.getDescription());
+
         holder.binding.getRoot().setOnClickListener(view ->{
             Context context = view.getContext();
             Intent intent = new Intent(context, RestaurantActivity.class);

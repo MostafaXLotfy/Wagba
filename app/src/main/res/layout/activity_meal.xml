@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MealActivity"
+    tools:context=".View.MealActivity"
     >
 
     <androidx.cardview.widget.CardView
@@ -123,16 +123,19 @@
                 >
 
                 <RadioButton
+                    android:id="@+id/rb_small"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/small" />
 
                 <RadioButton
+                    android:id="@+id/rb_regular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/regular" />
 
                 <RadioButton
+                    android:id="@+id/rb_large"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/large" />

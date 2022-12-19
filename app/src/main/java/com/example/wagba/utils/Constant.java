@@ -12,4 +12,5 @@ public class Constant {
 
     public static final String RESTAURANT_ID = "restaurantID";
     public static final String RESTAURANT_DATA = "RESTAURANT_DATA";
+    public static final String MEAL_DATA = "MEAl_DATA";
 }

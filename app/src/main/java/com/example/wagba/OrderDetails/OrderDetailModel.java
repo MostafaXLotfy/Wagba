@@ -1,13 +1,14 @@
 package com.example.wagba.OrderDetails;
 
-import com.example.wagba.Basket.orderItems.OrderItemsModel;
+import com.example.wagba.model.OrderItem;
+import com.example.wagba.model.Payment;
 
 import java.util.ArrayList;
 
 public class OrderDetailModel {
     private String RestaurantName;
-    private ArrayList<OrderItemsModel> orderItemsModels;
-    private PaymentModel paymentModel;
+    private ArrayList<OrderItem> orderItems;
+    private Payment payment;
 
     private String deliveryLocation;
     private String Name;
@@ -18,28 +19,28 @@ public class OrderDetailModel {
         return RestaurantName;
     }
 
-    public ArrayList<OrderItemsModel> getOrderItemsModels() {
-        return orderItemsModels;
+    public ArrayList<OrderItem> getOrderItemsModels() {
+        return orderItems;
     }
 
 
     public String getSubTotal() {
-        float subTotal = paymentModel.getSubTotal();
+        float subTotal = payment.getSubTotal();
         return String.format(Float.toString(subTotal), "EGP");
     }
 
     public String getTax() {
-        float tax = paymentModel.getTax();
+        float tax = payment.getTax();
         return String.format(Float.toString(tax), "EGP");
     }
 
     public String getDeliveryFees() {
-        float deliveryFees = paymentModel.getDeliveryFees();
+        float deliveryFees = payment.getDeliveryFees();
         return String.format(Float.toString(deliveryFees), "EGP");
     }
 
     public String getTotal() {
-        float total = paymentModel.getTotal();
+        float total = payment.getTotal();
         return String.format(Float.toString(total), "EGP");
     }
 
@@ -59,20 +60,20 @@ public class OrderDetailModel {
     public OrderDetailModel(
             String restaurantName,
             float deliveryFees,
-            ArrayList<OrderItemsModel> orderItemsModels,
+            ArrayList<OrderItem> orderItems,
             String Name,
             String PhoneNumber,
             String deliveryLocation
     ) {
         RestaurantName = restaurantName;
-        this.orderItemsModels = orderItemsModels;
-        OrderItemsModel model;
+        this.orderItems = orderItems;
+        OrderItem model;
         float subTotal = 0;
-        for (int i = 0; i < orderItemsModels.size(); i++){
-            model = orderItemsModels.get(i);
+        for (int i = 0; i < orderItems.size(); i++){
+            model = orderItems.get(i);
             subTotal += model.getTotalPrice();
         }
-        paymentModel = new PaymentModel(subTotal, deliveryFees);
+        payment = new Payment(subTotal, deliveryFees);
         this.Name = Name;
         this.deliveryLocation = deliveryLocation;
         this.phoneNumber = PhoneNumber;

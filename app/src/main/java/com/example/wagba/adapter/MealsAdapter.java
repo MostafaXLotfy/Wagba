@@ -8,21 +8,23 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wagba.MealActivity;
-import com.example.wagba.model.MealsModel;
+import com.example.wagba.View.MealActivity;
+import com.example.wagba.model.Meal;
 import com.example.wagba.View.RestaurantActivity;
 import com.example.wagba.databinding.MealsItemBinding;
+import com.example.wagba.model.RestaurantModel;
+import com.example.wagba.utils.Constant;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> {
-    private List<MealsModel> mealsModels;
+    private List<Meal> meals;
     RestaurantActivity activity;
-    Intent intent;
+    RestaurantModel restaurantModel;
 
-    public MealsAdapter(List<MealsModel> mealsModels) {
-        this.mealsModels = mealsModels;
+    public MealsAdapter(List<Meal> meals, RestaurantModel restaurantModel) {
+        this.meals = meals;
+        this.restaurantModel = restaurantModel;
     }
 
     @NonNull
@@ -30,7 +32,6 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         activity = (RestaurantActivity) context;
-        intent = new Intent(context, MealActivity.class);
         LayoutInflater inflater = LayoutInflater.from(context);
         MealsItemBinding binding = MealsItemBinding.inflate(inflater,
                 parent, false);
@@ -40,20 +41,33 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        MealsModel mealsModel = mealsModels.get(position);
-        holder.binding.tvName.setText(mealsModel.getName());
-        holder.binding.tvDescription.setText(mealsModel.getDescription());
-        holder.binding.tvPrice.setText(mealsModel.getPrice());
-        holder.binding.tvAvailable.setText(mealsModel.isAvailable());
+        Meal meal = meals.get(position);
+        holder.binding.tvName.setText(meal.getName());
+        holder.binding.tvDescription.setText(meal.getDescription());
+        holder.binding.tvPrice.setText(Float.toString(meal.getPrice()));
+        holder.binding.tvAvailable.setText(meal.isAvailable());
+        Intent intent = new Intent(holder.binding.getRoot().getContext(), MealActivity.class);
+
+        intent.putExtra(Constant.MEAL_DATA, meal);
+        intent.putExtra(Constant.RESTAURANT_DATA, restaurantModel);
+
         holder.binding.btnAdd.setOnClickListener(view -> {
-            activity.startActivity(intent);
+            onMealClicked(intent);
+        });
+        holder.binding.getRoot().setOnClickListener(view ->{
+            onMealClicked(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return mealsModels.size();
+        return meals.size();
     }
+
+    private void onMealClicked(Intent intent){
+        activity.startActivity(intent);
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder{
         MealsItemBinding binding;
         public ViewHolder(@NonNull MealsItemBinding binding) {

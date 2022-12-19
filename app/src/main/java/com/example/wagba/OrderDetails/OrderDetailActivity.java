@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.wagba.Basket.orderItems.OrderItemsModel;
+import com.example.wagba.model.OrderItem;
 import com.example.wagba.databinding.ActivityOrderDetailBinding;
 
 import java.util.ArrayList;
@@ -40,38 +40,38 @@ public class OrderDetailActivity extends AppCompatActivity {
     public void init_data() {
 
         String restaurantName = "Food Corner";
-        ArrayList<OrderItemsModel> orderItemsModels = new ArrayList<>();
-        orderItemsModels.add(new OrderItemsModel(
-                1,
-                "Crispy Crepe",
-                "Regular",
-                35.0f));
+        ArrayList<OrderItem> orderItems = new ArrayList<>();
+//        orderItems.add(new OrderItem(
+//                1,
+//                "Crispy Crepe",
+//                "Regular",
+//                35.0f));
+//
+//        orderItems.add(new OrderItem(
+//                2,
+//                "Cheese Mix Crepe",
+//                "Regular",
+//                35.0f));
+//
+//        orderItems.add(new OrderItem(
+//                1,
+//                "Hot Dog Crepe",
+//                "Regular",
+//                35.0f));
+//        orderItems.add(new OrderItem(
+//                2,
+//                "sus Crepe",
+//                "Regular",
+//                35.0f));
+//
+//        float deliveryFees = 0.5f;
+//        String name = "Mostafa Lotfy";
+//        String phoneNumber = "0111xxxxxxx";
+//        String deliveryLocation = "Gate 3";
 
-        orderItemsModels.add(new OrderItemsModel(
-                2,
-                "Cheese Mix Crepe",
-                "Regular",
-                35.0f));
 
-        orderItemsModels.add(new OrderItemsModel(
-                1,
-                "Hot Dog Crepe",
-                "Regular",
-                35.0f));
-        orderItemsModels.add(new OrderItemsModel(
-                2,
-                "sus Crepe",
-                "Regular",
-                35.0f));
-
-        float deliveryFees = 0.5f;
-        String name = "Mostafa Lotfy";
-        String phoneNumber = "0111xxxxxxx";
-        String deliveryLocation = "Gate 3";
-
-
-        orderDetailModel = new OrderDetailModel(restaurantName,
-                deliveryFees, orderItemsModels, name, phoneNumber, deliveryLocation);
+//        orderDetailModel = new OrderDetailModel(restaurantName,
+//                deliveryFees, orderItems, name, phoneNumber, deliveryLocation);
     }
 
     public void populate_fields() {

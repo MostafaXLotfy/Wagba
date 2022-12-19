@@ -16,7 +16,7 @@ public class RestaurantsViewModel extends AndroidViewModel {
     private RestaurantsRepository restaurantsRepository;
     public RestaurantsViewModel(@NonNull Application application) {
         super(application);
-        RestaurantsRepository restaurantsRepository = new RestaurantsRepository(application);
+         restaurantsRepository = new RestaurantsRepository(application);
         _allRestaurants = restaurantsRepository.get_allRestaurants();
     }
 

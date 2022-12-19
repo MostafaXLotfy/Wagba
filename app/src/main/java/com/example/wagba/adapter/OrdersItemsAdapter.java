@@ -1,4 +1,4 @@
-package com.example.wagba.Basket.orderItems;
+package com.example.wagba.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,14 +8,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wagba.databinding.BasketOrderItemBinding;
+import com.example.wagba.model.OrderItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrdersItemsAdapter extends RecyclerView.Adapter<OrdersItemsAdapter.ViewHolder> {
-    ArrayList<OrderItemsModel> orderItemsModels;
+    List<OrderItem> orderItems;
 
-    public OrdersItemsAdapter(ArrayList<OrderItemsModel> orderItemsModels) {
-        this.orderItemsModels = orderItemsModels;
+    public OrdersItemsAdapter(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
     @NonNull
@@ -31,16 +33,16 @@ public class OrdersItemsAdapter extends RecyclerView.Adapter<OrdersItemsAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull OrdersItemsAdapter.ViewHolder holder, int position) {
-        OrderItemsModel orderItemsModel = orderItemsModels.get(position);
-        holder.binding.tvName.setText(orderItemsModel.getMealName());
-        holder.binding.tvPrice.setText(orderItemsModel.getPrice());
-        holder.binding.tvQuantity.setText(orderItemsModel.getQuantity());
-        holder.binding.tvSize.setText(orderItemsModel.getSize());
+        OrderItem orderItem = orderItems.get(position);
+        holder.binding.tvName.setText(orderItem.getMealName());
+        holder.binding.tvPrice.setText(Float.toString(orderItem.getPrice()));
+        holder.binding.tvQuantity.setText(Integer.toString(orderItem.getQuantity()));
+        holder.binding.tvSize.setText(orderItem.getSize());
     }
 
     @Override
     public int getItemCount() {
-        return orderItemsModels.size();
+        return orderItems.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

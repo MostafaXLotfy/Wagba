@@ -1,15 +1,13 @@
 package com.example.wagba.repository;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.wagba.model.MealsModel;
-import com.example.wagba.model.RestaurantModel;
+import com.example.wagba.model.Meal;
 import com.example.wagba.utils.Constant;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -19,13 +17,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class RestaurantsMealsRepository {
     private static final String TAG = "RestaurantsMealsRepo";
     DatabaseReference mealRef;
-    List<MealsModel> _restaurantsMeals;
-    MutableLiveData<List<MealsModel>> _mealsModelLiveData;
+    List<Meal> _restaurantsMeals;
+    MutableLiveData<List<Meal>> _mealsModelLiveData;
 
     public RestaurantsMealsRepository(Application application){
     }
@@ -39,7 +36,7 @@ public class RestaurantsMealsRepository {
         mealRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                _restaurantsMeals.add(snapshot.getValue(MealsModel.class));
+                _restaurantsMeals.add(snapshot.getValue(Meal.class));
                 _mealsModelLiveData.setValue(_restaurantsMeals);
             }
 
@@ -64,7 +61,7 @@ public class RestaurantsMealsRepository {
         });
     }
 
-    public LiveData<List<MealsModel>> getRestaurant(String restaurantID){
+    public LiveData<List<Meal>> getRestaurant(String restaurantID){
         if(_mealsModelLiveData == null) {
             getData(restaurantID);
         }

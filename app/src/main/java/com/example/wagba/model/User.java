@@ -3,6 +3,7 @@ package com.example.wagba.model;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "user_table")
@@ -21,6 +22,7 @@ public class User {
 
     }
 
+    @Ignore
     public User(@NonNull String uid, String username, String email, String phoneNumber, String gender) {
         this.uid = uid;
         this.username = username;

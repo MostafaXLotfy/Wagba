@@ -3,16 +3,30 @@ package com.example.wagba.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+import com.example.wagba.utils.Constant;
+
 import java.util.List;
 
+@Entity(tableName = "restaurant_table")
 public class RestaurantModel implements Parcelable {
-    private String uid;
+
+    @NonNull
+    @PrimaryKey
+    @ColumnInfo(name = "restaurantID")
+    private int uid;
     private String name;
     private String description;
     private double deliveryFees;
 
     public RestaurantModel(){}
 
+    @Ignore
     public RestaurantModel(String name, String description, float deliveryFees) {
         this.name = name;
         this.description = description;
@@ -20,7 +34,7 @@ public class RestaurantModel implements Parcelable {
     }
 
     protected RestaurantModel(Parcel in) {
-        uid = in.readString();
+        uid = in.readInt();
         name = in.readString();
         description = in.readString();
         deliveryFees = in.readDouble();
@@ -62,11 +76,11 @@ public class RestaurantModel implements Parcelable {
         return deliveryFees;
     }
 
-    public String getUid() {
+    public int getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
+    public void setUid(int uid) {
         this.uid = uid;
     }
 
@@ -77,7 +91,7 @@ public class RestaurantModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(uid);
+        parcel.writeInt(uid);
         parcel.writeString(name);
         parcel.writeString(description);
         parcel.writeDouble(deliveryFees);
