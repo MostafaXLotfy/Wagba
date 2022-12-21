@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.wagba.model.Order;
 import com.example.wagba.utils.Constant;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,7 +31,8 @@ public class OrdersRepository {
     public OrdersRepository(Application application) {
         _application = application;
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        _ordersRef = db.getReference(Constant.ORDERS_END_POINT);
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        _ordersRef = db.getReference(Constant.ORDERS_END_POINT).child(userID);
         if(_orders == null){
             getData();
         }

@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.wagba.model.OrderDetail;
 import com.example.wagba.model.Restaurant;
 import com.example.wagba.utils.Constant;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,8 +23,10 @@ public class OrderDetailRepository {
     private DatabaseReference _restaurantsRef;
     public OrderDetailRepository(Application application){
         _application = application;
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        _ordersDetailsRef = db.getReference(Constant.ORDERS_DETAILS_END_POINT);
+        _ordersDetailsRef = db.getReference(Constant.ORDERS_DETAILS_END_POINT)
+                .child(userID);
         _restaurantsRef = db.getReference(Constant.RESTAURANTS_END_POINT);
     }
 
