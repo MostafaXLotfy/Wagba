@@ -1,6 +1,7 @@
 package com.example.wagba.OrderDetails;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -14,11 +15,15 @@ import com.example.wagba.model.Order;
 import com.example.wagba.model.OrderDetail;
 import com.example.wagba.databinding.ActivityOrderDetailBinding;
 import com.example.wagba.utils.Constant;
+import com.example.wagba.utils.OrderStatus;
 import com.example.wagba.viewModel.OrderDetailViewModel;
+
+import moe.feng.common.stepperview.VerticalStepperItemView;
 
 
 public class OrderDetailActivity extends AppCompatActivity {
-    private OrderDetail _orderDetail;
+    private final static String TAG = "OrderDetailActivity";
+    private VerticalStepperItemView mSteppers[];
     private ActivityOrderDetailBinding binding;
     private OrderDetailViewModel _orderDetailViewModel;
     private OrderDetailItemAdapter _adapter;
@@ -37,9 +42,12 @@ public class OrderDetailActivity extends AppCompatActivity {
         _orderDetailViewModel = ViewModelProvider.AndroidViewModelFactory
                 .getInstance(getApplication()).create(OrderDetailViewModel.class);
         String orderID = getIntent().getStringExtra(Constant.ORDER_ID);
+        initTracking();
         _orderDetailViewModel.getOrderDetails(orderID).observe(this, orderDetail -> {
-            if(_adapter == null) initRecyclerView(orderDetail);
-            updateUI(orderDetail);
+            if(_adapter == null) {
+                initRecyclerView(orderDetail);
+                updateUI(orderDetail);
+            }
         });
     }
 
@@ -64,8 +72,21 @@ public class OrderDetailActivity extends AppCompatActivity {
         binding.cvPayment.tvTaxAmount.setText(Float.toString(orderDetail.getTax()));
         binding.cvPayment.tvDeliveryAmount.setText(Float.toString(orderDetail.getDeliveryFees()));
 
-        //todo:: add tracking
-//        binding.cvTracking
+        OrderStatus status = orderDetail.getStatus();
+        if(status != OrderStatus.Ordered){
+            mSteppers[status.ordinal() - 1].nextStep();
+        }
+    }
+
+
+    public void initTracking(){
+        mSteppers = new VerticalStepperItemView[5];
+        mSteppers[0] = binding.cvTracking.stepper0;
+        mSteppers[1] = binding.cvTracking.stepper1;
+        mSteppers[2] = binding.cvTracking.stepper2;
+        mSteppers[3] = binding.cvTracking.stepper3;
+        mSteppers[4] = binding.cvTracking.stepper4;
+        VerticalStepperItemView.bindSteppers(mSteppers);
     }
 
 
