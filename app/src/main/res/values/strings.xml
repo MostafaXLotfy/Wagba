@@ -41,4 +41,6 @@
     <string name="deliver_to">Deliver to</string>
     <string name="gate_2">Gate 2</string>
     <string name="gate_3">Gate 3</string>
+    <string name="male">male</string>
+    <string name="sign_out">sign out</string>
 </resources>

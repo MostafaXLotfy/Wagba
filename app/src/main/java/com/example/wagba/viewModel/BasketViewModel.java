@@ -12,6 +12,7 @@ import com.example.wagba.model.OrderDetail;
 import com.example.wagba.repository.BasketRepository;
 import com.example.wagba.repository.OrderDetailRepository;
 import com.example.wagba.repository.OrdersRepository;
+import com.example.wagba.repository.UserRepository;
 
 import java.util.Objects;
 
@@ -19,11 +20,14 @@ public class BasketViewModel extends AndroidViewModel {
     private BasketRepository _basketRepository;
     private OrdersRepository _ordersRepository;
     private OrderDetailRepository _orderDetailRepository;
+    private UserRepository _userRepository;
+
     public BasketViewModel(@NonNull Application application) {
         super(application);
         _basketRepository = new BasketRepository(application);
         _ordersRepository = new OrdersRepository(application);
         _orderDetailRepository = new OrderDetailRepository(application);
+        _userRepository = new UserRepository(application);
     }
     public LiveData<Basket> getBasket(){
         return _basketRepository.getBasket();

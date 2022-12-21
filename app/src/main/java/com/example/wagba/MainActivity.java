@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -14,21 +13,22 @@ import android.view.View;
 import com.example.wagba.View.LoginActivity;
 import com.example.wagba.View.BasketFragment;
 import com.example.wagba.View.OrdersFragment;
+import com.example.wagba.View.ProfileFragment;
 import com.example.wagba.View.RestaurantsFragment;
 import com.example.wagba.databinding.ActivityMainBinding;
 import com.example.wagba.utils.Constant;
 import com.example.wagba.viewModel.MainViewModel;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private MainViewModel _mainViewModel;
-    BasketFragment basketFragment = BasketFragment.newInstance();
-    OrdersFragment myOrderFragment = OrdersFragment.newInstance();
-    RestaurantsFragment restaurantsFragment;
+    BasketFragment _basketFragment;
+    OrdersFragment _OrdersFragment;
+    RestaurantsFragment _restaurantsFragment;
+    ProfileFragment _profileFragment;
     Fragment activeFragment;
 
 
@@ -50,19 +50,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void init_navigation() {
-         basketFragment = BasketFragment.newInstance();
-         myOrderFragment = OrdersFragment.newInstance();
-        restaurantsFragment = RestaurantsFragment.newInstance();
-        activeFragment = restaurantsFragment;
+         _basketFragment = BasketFragment.newInstance();
+         _OrdersFragment = OrdersFragment.newInstance();
+        _restaurantsFragment = RestaurantsFragment.newInstance();
+        _profileFragment = ProfileFragment.newInstance();
+        activeFragment = _restaurantsFragment;
 
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
-        ft.add(R.id.fcv_content, basketFragment, Constant.BASKET_FRAG_TAG)
-                .hide(basketFragment);
-        ft.add(R.id.fcv_content, myOrderFragment, Constant.MY_ORDERS_FRAG_TAG)
-                .hide(myOrderFragment);
+        ft.add(R.id.fcv_content, _basketFragment, Constant.BASKET_FRAG_TAG)
+                .hide(_basketFragment);
+        ft.add(R.id.fcv_content, _OrdersFragment, Constant.MY_ORDERS_FRAG_TAG)
+                .hide(_OrdersFragment);
+        ft.add(R.id.fcv_content, _profileFragment, Constant.PROFILE_FRAG_TAG)
+                .hide(_profileFragment);
         ft.add(R.id.fcv_content, activeFragment, Constant.RESTAURANTS_FRAG_TAG);
         ft.commit();
 
@@ -94,6 +97,15 @@ public class MainActivity extends AppCompatActivity {
                         .show(Objects.requireNonNull(ordersFragment))
                         .commit();
                 activeFragment = ordersFragment;
+                return true;
+            }else if (itemId == R.id.profile){
+                ProfileFragment profileFragment = (ProfileFragment)
+                        fm.findFragmentByTag(Constant.PROFILE_FRAG_TAG);
+                fm.beginTransaction()
+                        .hide(activeFragment)
+                        .show(Objects.requireNonNull(profileFragment))
+                        .commit();
+                activeFragment = profileFragment;
                 return true;
             }
             return false;
