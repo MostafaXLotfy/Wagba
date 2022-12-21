@@ -6,16 +6,22 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
 @Entity(tableName = "payment_table")
 public class Payment {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @NonNull
     @ColumnInfo(name = "paymentID")
-    private int uid;
+    //exclude from firebase
+    @Exclude
+    private String uid;
 
     @NonNull
     @ColumnInfo(name = "restaurantID")
-    private int restaurantID;
+    @Exclude
+    private String restaurantID;
 
     private float subTotal;
     private float tax;
@@ -82,19 +88,19 @@ public class Payment {
     }
 
 
-    public int getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 
-    public int getRestaurantID() {
+    public String getRestaurantID() {
         return restaurantID;
     }
 
-    public void setRestaurantID(int restaurantID) {
+    public void setRestaurantID(String restaurantID) {
         this.restaurantID = restaurantID;
     }
 }

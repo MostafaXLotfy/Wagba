@@ -6,7 +6,7 @@ import android.os.Parcelable;
 public class Meal implements Parcelable {
 
 //    @PropertyName("mealID")
-    private int uid;
+    private String uid;
     private String name;
     private String description;
     private float price;
@@ -35,11 +35,11 @@ public class Meal implements Parcelable {
         return this.price;
     }
 
-    public int getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 

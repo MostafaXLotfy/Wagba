@@ -14,11 +14,11 @@ public class OrderItem {
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "orderItemID")
-    private int uid;
+    private String uid;
 
     @NonNull
     @ColumnInfo(name = "restaurantID")
-    private int restaurantID;
+    private String restaurantID;
 
     private int quantity;
 
@@ -85,19 +85,19 @@ public class OrderItem {
 
 
 
-    public int getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 
-    public int getRestaurantID() {
+    public String getRestaurantID() {
         return restaurantID;
     }
 
-    public void setRestaurantID(int restaurantID) {
+    public void setRestaurantID(String restaurantID) {
         this.restaurantID = restaurantID;
     }
 }

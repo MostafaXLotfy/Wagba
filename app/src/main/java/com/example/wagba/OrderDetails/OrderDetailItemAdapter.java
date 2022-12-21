@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.wagba.model.OrderItem;
 import com.example.wagba.databinding.OrderDetailItemBinding;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDetailItemAdapter extends RecyclerView.Adapter<OrderDetailItemAdapter.ViewHolder> {
-    ArrayList<OrderItem> orderItems;
+    List<OrderItem> orderItems;
 
-    public OrderDetailItemAdapter(ArrayList<OrderItem> orderItems){
+    public OrderDetailItemAdapter(List<OrderItem> orderItems){
         this.orderItems = orderItems;
     }
     @NonNull
@@ -35,9 +35,8 @@ public class OrderDetailItemAdapter extends RecyclerView.Adapter<OrderDetailItem
         OrderItem orderItem = orderItems.get(position);
         holder.binding.tvName.setText(orderItem.getMealName());
         holder.binding.tvPrice.setText(Float.toString(orderItem.getPrice()));
-        holder.binding.tvQuantity.setText(orderItem.getQuantity());
+        holder.binding.tvQuantity.setText(Integer.toString(orderItem.getQuantity()));
         holder.binding.tvSize.setText(orderItem.getSize());
-
     }
 
     @Override

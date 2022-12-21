@@ -12,7 +12,7 @@ import android.widget.RadioButton;
 import com.example.wagba.model.Meal;
 import com.example.wagba.databinding.ActivityMealBinding;
 import com.example.wagba.model.OrderItem;
-import com.example.wagba.model.RestaurantModel;
+import com.example.wagba.model.Restaurant;
 import com.example.wagba.utils.BasketState;
 import com.example.wagba.utils.Constant;
 import com.example.wagba.viewModel.MealViewModel;
@@ -72,16 +72,19 @@ public class MealActivity extends AppCompatActivity {
     }
 
     private void onAddToBasket(){
-        RestaurantModel restaurantModel = getIntent().getParcelableExtra(Constant.RESTAURANT_DATA);
-        BasketState basketState = _mealViewModel.getBasketState(restaurantModel.getUid());
+        Restaurant restaurant = getIntent().getParcelableExtra(Constant.RESTAURANT_DATA);
+        BasketState basketState = _mealViewModel.getBasketState(restaurant.getUid());
+        Log.d(TAG, "onAddToBasket: " + restaurant.getUid());
 
         if(basketState == BasketState.EMPTY){
-            _mealViewModel.newBasket(restaurantModel);
+            _mealViewModel.newBasket(restaurant);
         }else if(basketState == BasketState.SAME_RESTAURANT){
+            Log.d(TAG, "onAddToBasket: same rest");
         }else{
+            Log.d(TAG, "onAddToBasket: not same rest");
             //todo:: give user option
             _mealViewModel.deleteBasket();
-            _mealViewModel.newBasket(restaurantModel);
+            _mealViewModel.newBasket(restaurant);
         }
 
         OrderItem orderItem = new OrderItem(meal.getName(), this.getQuantity(),

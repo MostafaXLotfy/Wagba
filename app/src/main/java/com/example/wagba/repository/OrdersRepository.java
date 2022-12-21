@@ -1,70 +1,86 @@
 package com.example.wagba.repository;
 
 import android.app.Application;
-import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.wagba.model.Order;
-import com.example.wagba.model.RestaurantModel;
 import com.example.wagba.utils.Constant;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrdersRepository {
     private static final String TAG = "OrdersRepository";
-    private MutableLiveData<List<Order>> _ordersLiveData;
-    private List<Order> _orders;
+    private static MutableLiveData<List<Order>> _ordersLiveData;
+    private static List<Order> _orders;
     private DatabaseReference _ordersRef;
-    private DatabaseReference _restaurantsRef;
+    private Application _application;
 
     public OrdersRepository(Application application) {
-        getData();
+        _application = application;
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        _ordersRef = db.getReference(Constant.ORDERS_END_POINT);
+        if(_orders == null){
+            getData();
+        }
     }
 
-    private void getData() {
-        _ordersRef = FirebaseDatabase
-                .getInstance().getReference(Constant.ORDERS_END_POINT);
-        _restaurantsRef = FirebaseDatabase
-                .getInstance().getReference(Constant.RESTAURANTS_END_POINT);
+    //todo:: change this because it will go boom
+
+    private void getData(){
         _orders = new ArrayList<>();
-        List<String> restaurantsIDs = new ArrayList<>();
         _ordersLiveData = new MutableLiveData<>(_orders);
-
-        _ordersRef.get().addOnSuccessListener(dataSnapshot -> {
-            for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                _orders.add(ds.getValue(Order.class));
-                restaurantsIDs.add(ds.child(Constant.RESTAURANT_ID).getValue(String.class));
+        _ordersRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Order order = snapshot.getValue(Order.class);
+                _orders.add(order);
+               _ordersLiveData.setValue(_orders);
             }
-            for (int i = 0; i < _orders.size(); i++) {
-                int finalI = i;
-                _restaurantsRef.child(restaurantsIDs.get(i))
-                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                RestaurantModel restaurantModel = snapshot.getValue(RestaurantModel.class);
-                                _orders.get(finalI).setRestaurantName(restaurantModel.getName());
-                                _ordersLiveData.setValue(_orders);
 
-                            }
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
             }
-            _ordersLiveData.setValue(_orders);
-            Log.d(TAG, "getData: ");
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(_application, error.toString(), Toast.LENGTH_SHORT).show();
+            }
         });
+    }
+
+    public String submitOrder(Order order){
+        String id = _ordersRef.push().getKey();
+        order.setUid(id);
+        _ordersRef.child(id).setValue(order).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(_application, e.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        return id;
     }
 
     public LiveData<List<Order>> getAllOrders() {

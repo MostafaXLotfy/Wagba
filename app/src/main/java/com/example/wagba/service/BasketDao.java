@@ -1,11 +1,6 @@
 package com.example.wagba.service;
 
-import androidx.annotation.TransitionRes;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.DeleteTable;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -15,21 +10,20 @@ import androidx.room.Update;
 import com.example.wagba.model.Basket;
 import com.example.wagba.model.OrderItem;
 import com.example.wagba.model.Payment;
-import com.example.wagba.model.RestaurantModel;
+import com.example.wagba.model.Restaurant;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Dao
 public abstract class BasketDao {
     @Insert
-    abstract void insertRestaurant(RestaurantModel restaurantModel);
+    abstract void insertRestaurant(Restaurant restaurant);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     public abstract void insertOrderItem(OrderItem orderItem);
 
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract void insertPayment(Payment payment);
 
     @Update
@@ -37,39 +31,40 @@ public abstract class BasketDao {
 
     @Transaction
     public void insertBasket(Basket basket) {
-        RestaurantModel restaurantModel = basket.getRestaurantModel();
+        Restaurant restaurant = basket.getRestaurantModel();
 
         List<OrderItem> orderItems = basket.getOrderItems();
         Payment payment = basket.getPayment();
 
-        int id = restaurantModel.getUid();
+        String id = restaurant.getUid();
 
-        insertRestaurant(restaurantModel);
+        insertRestaurant(restaurant);
         for (OrderItem orderItem : orderItems) {
             orderItem.setRestaurantID(id);
             insertOrderItem(orderItem);
         }
+        payment.setUid("1");
         payment.setRestaurantID(id);
         insertPayment(payment);
     }
 
     @Query("SELECT * FROM RESTAURANT_TABLE LIMIT 1")
-    abstract RestaurantModel getRestaurant();
+    abstract Restaurant getRestaurant();
 
     @Query("SELECT * FROM ORDER_ITEM_TABLE AS O where O.restaurantID =:restaurantID")
-    abstract List<OrderItem> getOrderItems(int restaurantID);
+    abstract List<OrderItem> getOrderItems(String restaurantID);
 
     @Query("SELECT * FROM PAYMENT_TABLE AS P WHERE P.restaurantID =:restaurantID ")
-    abstract Payment getPayment(int restaurantID);
+    abstract Payment getPayment(String restaurantID);
 
     @Transaction
     public Basket getBasket(){
-        RestaurantModel restaurantModel = getRestaurant();
-        if(restaurantModel == null) return null;
-        int restaurantID = restaurantModel.getUid();
+        Restaurant restaurant = getRestaurant();
+        if(restaurant == null) return null;
+        String restaurantID = restaurant.getUid();
         List<OrderItem> orderItems = getOrderItems(restaurantID);
         Payment payment = getPayment(restaurantID);
-        return new Basket(restaurantModel, orderItems, payment);
+        return new Basket(restaurant, orderItems, payment);
     };
 
 

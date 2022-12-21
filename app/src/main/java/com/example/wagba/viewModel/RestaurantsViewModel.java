@@ -6,13 +6,13 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.wagba.model.RestaurantModel;
+import com.example.wagba.model.Restaurant;
 import com.example.wagba.repository.RestaurantsRepository;
 
 import java.util.List;
 
 public class RestaurantsViewModel extends AndroidViewModel {
-    private LiveData<List<RestaurantModel>> _allRestaurants;
+    private LiveData<List<Restaurant>> _allRestaurants;
     private RestaurantsRepository restaurantsRepository;
     public RestaurantsViewModel(@NonNull Application application) {
         super(application);
@@ -20,7 +20,7 @@ public class RestaurantsViewModel extends AndroidViewModel {
         _allRestaurants = restaurantsRepository.get_allRestaurants();
     }
 
-    public LiveData<List<RestaurantModel>> getAllRestaurants(){
+    public LiveData<List<Restaurant>> getAllRestaurants(){
         return this._allRestaurants;
     }
 }

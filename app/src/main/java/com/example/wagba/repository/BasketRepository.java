@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.wagba.model.Basket;
 import com.example.wagba.model.OrderItem;
 import com.example.wagba.model.Payment;
-import com.example.wagba.model.RestaurantModel;
+import com.example.wagba.model.Restaurant;
 import com.example.wagba.service.BasketDao;
 import com.example.wagba.service.UserRoomDatabase;
 import com.example.wagba.utils.BasketState;
@@ -22,6 +22,7 @@ public class BasketRepository {
     private static MutableLiveData<Basket> _basketLiveData = new MutableLiveData<>();
     private static Basket _basket;
     private final BasketDao _basketDao;
+
     public BasketRepository(Application application) {
         UserRoomDatabase userRoomDatabase = UserRoomDatabase.getDataBase(application);
         _basketDao = userRoomDatabase.BasketDao();
@@ -41,11 +42,11 @@ public class BasketRepository {
 
     }
 
-    public void newBasket(RestaurantModel restaurantModel) {
+    public void newBasket(Restaurant restaurant) {
         if (_basket == null) {
             synchronized (BasketRepository.class) {
                 _basket = new Basket();
-                _basket.setRestaurantModel(restaurantModel);
+                _basket.setRestaurantModel(restaurant);
                 new AddBasketAsyncTask(_basketDao).execute(_basket);
                 Log.d(TAG, "newBasket: " + _basket.getOrderItems().size());
                 _basketLiveData.setValue(_basket);
@@ -65,15 +66,11 @@ public class BasketRepository {
         new UpdatePaymentAsyncTask(_basketDao).execute(_basket.getPayment());
     }
 
-    public BasketState getBasketStatus(int restaurantID) {
+    public BasketState getBasketStatus(String restaurantID) {
         if (_basket == null) return BasketState.EMPTY;
-        else if (_basket.getRestaurantModel().getUid() == restaurantID)
+        else if (_basket.getRestaurantModel().getUid().equals(restaurantID))
             return BasketState.SAME_RESTAURANT;
         else return BasketState.NOT_SAME_RESTAURANT;
-    }
-
-    public void submitBasket() {
-
     }
 
     private static class AddBasketAsyncTask extends AsyncTask<Basket, Void, Void> {

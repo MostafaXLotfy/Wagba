@@ -138,6 +138,7 @@
                 >
 
                 <RadioGroup
+                    android:id="@+id/rg_delivery_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="20dp"
@@ -147,17 +148,17 @@
                         style="@style/PrimaryText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Deliver to" />
+                        android:text="@string/deliver_to" />
 
                     <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Gate3" />
+                        android:text="@string/gate_2" />
 
                     <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Gate6" />
+                        android:text="@string/gate_3" />
 
                 </RadioGroup>
             </androidx.cardview.widget.CardView>
@@ -167,6 +168,7 @@
                 layout="@layout/payment_card" />
             
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_order"
                 android:layout_width="match_parent"
                 android:layout_height="60sp"
                 android:text="@string/order"

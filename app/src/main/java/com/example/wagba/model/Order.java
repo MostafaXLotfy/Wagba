@@ -1,5 +1,6 @@
 package com.example.wagba.model;
 
+import com.example.wagba.utils.Constant;
 import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 import com.google.firebase.database.PropertyName;
 
@@ -8,57 +9,51 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Order {
+    @PropertyName(Constant.ORDER_ID)
     private String uid;
-//    @PropertyName("name")
-    private String restaurantName;
+    String restaurantName;
     private int quantity;
-    private Date date;
+    private String date;
     private Float price;
 
     public Order(){
-        restaurantName = "Not found";
         quantity = 0;
         price = 0.0f;
     }
 
-    public Order(String restaurantName, int quantity, Date date, Float price) {
-        this.restaurantName = restaurantName;
-        this.quantity = quantity;
-        this.date = date;
-        this.price = price;
+    public Order(Basket basket){
+        restaurantName = basket.getRestaurantName();
+        price = basket.getTotal();
+        quantity = basket.getQuantity();
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ENGLISH);
+        date = dateFormat.format(new Date());
     }
 
     public String getRestaurantName() {
-        return restaurantName;
+        return this.restaurantName;
     }
 
-    public String getQuantity() {
-        return String.format(Integer.toString(quantity), "delivered");
+    public int getQuantity() {
+        return quantity;
     }
 
     public String getDate() {
-        if(date == null) return "not available";
-        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ENGLISH);
-        return dateFormat.format(date);
+        return date;
     }
 
-    public String getPrice() {
-        return String.format(Float.toString(price), "EGP");
+    public float getPrice() {
+        return price;
     }
 
     public String getUid() {
         return uid;
     }
 
-    public void setRestaurantName(String restaurantName) {
-        this.restaurantName = restaurantName;
-    }
-
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -68,5 +63,9 @@ public class Order {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public void setRestaurant(String restaurantName) {
+        this.restaurantName = restaurantName;
     }
 }

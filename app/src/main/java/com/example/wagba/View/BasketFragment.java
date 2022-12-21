@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,8 +26,8 @@ public class BasketFragment extends Fragment {
 
     private static final String TAG = "BasketFragment";
     private FragmentBasketBinding binding;
-    private MainActivity activity;
-    private BasketViewModel _basketViewModel;
+    private Basket _basket;
+    BasketViewModel _basketViewModel;
     OrdersItemsAdapter _adapter;
 
     public BasketFragment() {
@@ -64,6 +65,7 @@ public class BasketFragment extends Fragment {
 
         LiveData<Basket> basketLiveData =
                 _basketViewModel.getBasket();
+        _basket = basketLiveData.getValue();
 
         basketLiveData.observe(requireActivity(), basket -> {
             if(basket != null){
@@ -77,7 +79,9 @@ public class BasketFragment extends Fragment {
                 updateUI(basket);
             }
             if(_adapter != null) _adapter.notifyDataSetChanged();
+            _basket = basket;
         });
+        binding.btnOrder.setOnClickListener(this::onOrder);
     }
 
     @Override
@@ -93,6 +97,13 @@ public class BasketFragment extends Fragment {
         binding.cvPayment.tvTotalAmount.setText(Float.toString(basket.getTotal()));
         binding.cvPayment.tvTaxAmount.setText(Float.toString(basket.getTax()));
         binding.cvPayment.tvDeliveryAmount.setText(Float.toString(basket.getDeliveryFees()));
+    }
+
+    public void onOrder(View view){
+        int rb_id = binding.rgDeliveryLocation.getCheckedRadioButtonId();
+        RadioButton rb = binding.getRoot().findViewById(rb_id);
+        String deliveryLocation = rb.getText().toString();
+        _basketViewModel.submitOrder(deliveryLocation);
     }
 
 

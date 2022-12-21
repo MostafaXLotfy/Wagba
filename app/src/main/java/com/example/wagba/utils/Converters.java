@@ -4,7 +4,7 @@ import androidx.room.TypeConverter;
 
 import com.example.wagba.model.OrderItem;
 import com.example.wagba.model.Payment;
-import com.example.wagba.model.RestaurantModel;
+import com.example.wagba.model.Restaurant;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -21,8 +21,8 @@ public class Converters {
     }
 
     @TypeConverter
-    public RestaurantModel restaurantFromString(String value){
-        return new Gson().fromJson(value, RestaurantModel.class);
+    public Restaurant restaurantFromString(String value){
+        return new Gson().fromJson(value, Restaurant.class);
     }
 
     @TypeConverter
@@ -36,8 +36,8 @@ public class Converters {
     }
 
     @TypeConverter
-    public String stringFromRestaurant(RestaurantModel restaurantModel) {
-        return new Gson().toJson(restaurantModel);
+    public String stringFromRestaurant(Restaurant restaurant) {
+        return new Gson().toJson(restaurant);
     }
 
     @TypeConverter

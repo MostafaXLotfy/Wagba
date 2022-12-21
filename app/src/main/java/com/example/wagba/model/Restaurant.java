@@ -9,46 +9,42 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.example.wagba.utils.Constant;
-
-import java.util.List;
-
 @Entity(tableName = "restaurant_table")
-public class RestaurantModel implements Parcelable {
+public class Restaurant implements Parcelable {
 
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "restaurantID")
-    private int uid;
+    private String uid;
     private String name;
     private String description;
     private double deliveryFees;
 
-    public RestaurantModel(){}
+    public Restaurant(){}
 
     @Ignore
-    public RestaurantModel(String name, String description, float deliveryFees) {
+    public Restaurant(String name, String description, float deliveryFees) {
         this.name = name;
         this.description = description;
         this.deliveryFees = deliveryFees;
     }
 
-    protected RestaurantModel(Parcel in) {
-        uid = in.readInt();
+    protected Restaurant(Parcel in) {
+        uid = in.readString();
         name = in.readString();
         description = in.readString();
         deliveryFees = in.readDouble();
     }
 
-    public static final Creator<RestaurantModel> CREATOR = new Creator<RestaurantModel>() {
+    public static final Creator<Restaurant> CREATOR = new Creator<Restaurant>() {
         @Override
-        public RestaurantModel createFromParcel(Parcel in) {
-            return new RestaurantModel(in);
+        public Restaurant createFromParcel(Parcel in) {
+            return new Restaurant(in);
         }
 
         @Override
-        public RestaurantModel[] newArray(int size) {
-            return new RestaurantModel[size];
+        public Restaurant[] newArray(int size) {
+            return new Restaurant[size];
         }
     };
 
@@ -76,11 +72,11 @@ public class RestaurantModel implements Parcelable {
         return deliveryFees;
     }
 
-    public int getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 
@@ -91,7 +87,7 @@ public class RestaurantModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(uid);
+        parcel.writeString(uid);
         parcel.writeString(name);
         parcel.writeString(description);
         parcel.writeDouble(deliveryFees);

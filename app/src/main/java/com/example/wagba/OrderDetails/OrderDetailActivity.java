@@ -5,25 +5,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.wagba.model.OrderItem;
+import com.example.wagba.model.Order;
+import com.example.wagba.model.OrderDetail;
 import com.example.wagba.databinding.ActivityOrderDetailBinding;
+import com.example.wagba.utils.Constant;
+import com.example.wagba.viewModel.OrderDetailViewModel;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class OrderDetailActivity extends AppCompatActivity {
-    static final ArrayList<String> trackingStatus = new ArrayList<>(Arrays.asList(
-            "Ordered",
-            "Accepted",
-            "Preparing",
-            "Delivering",
-            "Delivered"
-    ));
-    OrderDetailModel orderDetailModel;
-    ActivityOrderDetailBinding binding;
+    private OrderDetail _orderDetail;
+    private ActivityOrderDetailBinding binding;
+    private OrderDetailViewModel _orderDetailViewModel;
+    private OrderDetailItemAdapter _adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,55 +30,22 @@ public class OrderDetailActivity extends AppCompatActivity {
         binding = ActivityOrderDetailBinding.inflate(inflater);
         View view = binding.getRoot();
         setContentView(view);
-        init_data();
-        populate_data();
-
+        initData();
     }
 
-    public void init_data() {
-
-        String restaurantName = "Food Corner";
-        ArrayList<OrderItem> orderItems = new ArrayList<>();
-//        orderItems.add(new OrderItem(
-//                1,
-//                "Crispy Crepe",
-//                "Regular",
-//                35.0f));
-//
-//        orderItems.add(new OrderItem(
-//                2,
-//                "Cheese Mix Crepe",
-//                "Regular",
-//                35.0f));
-//
-//        orderItems.add(new OrderItem(
-//                1,
-//                "Hot Dog Crepe",
-//                "Regular",
-//                35.0f));
-//        orderItems.add(new OrderItem(
-//                2,
-//                "sus Crepe",
-//                "Regular",
-//                35.0f));
-//
-//        float deliveryFees = 0.5f;
-//        String name = "Mostafa Lotfy";
-//        String phoneNumber = "0111xxxxxxx";
-//        String deliveryLocation = "Gate 3";
-
-
-//        orderDetailModel = new OrderDetailModel(restaurantName,
-//                deliveryFees, orderItems, name, phoneNumber, deliveryLocation);
+    public void initData(){
+        _orderDetailViewModel = ViewModelProvider.AndroidViewModelFactory
+                .getInstance(getApplication()).create(OrderDetailViewModel.class);
+        String orderID = getIntent().getStringExtra(Constant.ORDER_ID);
+        _orderDetailViewModel.getOrderDetails(orderID).observe(this, orderDetail -> {
+            if(_adapter == null) initRecyclerView(orderDetail);
+            updateUI(orderDetail);
+        });
     }
 
-    public void populate_fields() {
-    }
-
-    public void populate_data() {
-        binding.tvName.setText(orderDetailModel.getRestaurantName());
+    public void initRecyclerView(OrderDetail orderDetail){
         OrderDetailItemAdapter adapter = new OrderDetailItemAdapter(
-                orderDetailModel.getOrderItemsModels());
+                orderDetail.getOrderItems());
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
         DividerItemDecoration dividerItemDecoration =
@@ -89,13 +54,18 @@ public class OrderDetailActivity extends AppCompatActivity {
         binding.cvDetails.rcOrderDetails.setAdapter(adapter);
         binding.cvDetails.rcOrderDetails.setLayoutManager(layoutManager);
         binding.cvDetails.rcOrderDetails.addItemDecoration(dividerItemDecoration);
-
-        binding.cvPayment.tvSubtotalAmount.setText(orderDetailModel.getSubTotal());
-        binding.cvPayment.tvTotalAmount.setText(orderDetailModel.getTotal());
-        binding.cvPayment.tvTaxAmount.setText(orderDetailModel.getTax());
-        binding.cvPayment.tvDeliveryAmount.setText(orderDetailModel.getDeliveryFees());
+    }
 
 
+    public void updateUI(OrderDetail orderDetail) {
+        binding.tvName.setText(orderDetail.getRestaurantName());
+        binding.cvPayment.tvSubtotalAmount.setText(Float.toString(orderDetail.getSubTotal()));
+        binding.cvPayment.tvTotalAmount.setText(Float.toString(orderDetail.getTotal()));
+        binding.cvPayment.tvTaxAmount.setText(Float.toString(orderDetail.getTax()));
+        binding.cvPayment.tvDeliveryAmount.setText(Float.toString(orderDetail.getDeliveryFees()));
+
+        //todo:: add tracking
+//        binding.cvTracking
     }
 
 

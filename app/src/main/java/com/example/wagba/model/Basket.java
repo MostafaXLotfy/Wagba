@@ -1,5 +1,6 @@
 package com.example.wagba.model;
 import androidx.room.Embedded;
+import androidx.room.Ignore;
 import androidx.room.Relation;
 
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class Basket {
     @Embedded
-    private RestaurantModel restaurantModel;
+    private Restaurant restaurant;
 
     @Relation(
             parentColumn = "restaurantID",
@@ -24,23 +25,26 @@ public class Basket {
             entity = Payment.class
     )
     private Payment payment;
+    @Ignore
+    private int quantity;
 
 
 
     public String getRestaurantName() {
-        return restaurantModel.getName();
+        return restaurant.getName();
     }
 
     public List<OrderItem> getOrderItemsModels() {
         return orderItems;
     }
 
+
     public Basket(){
 
     }
 
-    public Basket(RestaurantModel restaurantModel, List<OrderItem> orderItems, Payment payment){
-        this.restaurantModel = restaurantModel;
+    public Basket(Restaurant restaurant, List<OrderItem> orderItems, Payment payment){
+        this.restaurant = restaurant;
         this.orderItems = orderItems;
         this.payment = payment;
     }
@@ -61,8 +65,8 @@ public class Basket {
         return payment.getTotal();
     }
 
-    public RestaurantModel getRestaurantModel() {
-        return restaurantModel;
+    public Restaurant getRestaurantModel() {
+        return restaurant;
     }
 
     public Payment getPayment() {
@@ -71,6 +75,10 @@ public class Basket {
 
     public List<OrderItem> getOrderItems() {
         return orderItems;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     public void setOrderItems(ArrayList<OrderItem> orderItems) {
@@ -84,10 +92,9 @@ public class Basket {
         this.payment = payment;
     }
 
-    public void setRestaurantModel(RestaurantModel restaurantModel) {
-        this.restaurantModel = restaurantModel;
-        this.payment = new Payment((float) this.restaurantModel.getDeliveryFees());
-//        this.payment.setUid("1");
+    public void setRestaurantModel(Restaurant restaurant) {
+        this.restaurant = restaurant;
+        this.payment = new Payment((float) this.restaurant.getDeliveryFees());
         this.orderItems = new ArrayList<>();
     }
 
@@ -97,13 +104,15 @@ public class Basket {
     }
 
     public void addOrderItem(OrderItem orderItem){
-        orderItem.setUid(orderItems.size());
-        orderItem.setRestaurantID(restaurantModel.getUid());
+        orderItem.setUid(Integer.toString(orderItems.size() + 1));
+        orderItem.setRestaurantID(restaurant.getUid());
         this.orderItems.add(orderItem);
         this.calculatePayment(orderItem);
+        this.quantity += orderItem.getQuantity();
     }
 
     private void calculatePayment(OrderItem orderItem){
         this.payment.calculateItemPrice(orderItem);
     }
+
 }

@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.example.wagba.model.OrderItem;
-import com.example.wagba.model.RestaurantModel;
+import com.example.wagba.model.Restaurant;
 import com.example.wagba.repository.BasketRepository;
 import com.example.wagba.utils.BasketState;
 
@@ -18,8 +18,8 @@ public class MealViewModel extends AndroidViewModel {
         _basketRepository = new BasketRepository(application);
     }
 
-    public void newBasket(RestaurantModel restaurantModel){
-        _basketRepository.newBasket(restaurantModel);
+    public void newBasket(Restaurant restaurant){
+        _basketRepository.newBasket(restaurant);
     }
 
     public void deleteBasket(){
@@ -30,7 +30,7 @@ public class MealViewModel extends AndroidViewModel {
         _basketRepository.addOrderItem(orderItem);
     }
 
-    public BasketState getBasketState(int restaurantID){
+    public BasketState getBasketState(String restaurantID){
         return  _basketRepository.getBasketStatus(restaurantID);
     }
 }

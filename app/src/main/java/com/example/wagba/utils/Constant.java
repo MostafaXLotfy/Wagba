@@ -3,6 +3,7 @@ package com.example.wagba.utils;
 public class Constant {
     public static final String RESTAURANTS_END_POINT = "restaurants";
     public static final String ORDERS_END_POINT = "orders";
+    public static final String ORDERS_DETAILS_END_POINT = "ordersDetails";
     public static final String PAYMENTS_END_POINT = "payments";
     public static final String MEALS_END_POINT = "meals";
 
@@ -13,4 +14,5 @@ public class Constant {
     public static final String RESTAURANT_ID = "restaurantID";
     public static final String RESTAURANT_DATA = "RESTAURANT_DATA";
     public static final String MEAL_DATA = "MEAl_DATA";
+    public static final String ORDER_ID = "orderID";
 }

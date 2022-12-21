@@ -9,17 +9,17 @@ import androidx.room.TypeConverters;
 
 import com.example.wagba.model.OrderItem;
 import com.example.wagba.model.Payment;
-import com.example.wagba.model.RestaurantModel;
+import com.example.wagba.model.Restaurant;
 import com.example.wagba.model.User;
 import com.example.wagba.utils.Converters;
 
 @Database(entities = {
         User.class,
-        RestaurantModel.class,
+        Restaurant.class,
         OrderItem.class,
         Payment.class,
         },
-        version = 14, exportSchema = false)
+        version = 15, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class UserRoomDatabase extends RoomDatabase {
     public abstract UserDao userDao();

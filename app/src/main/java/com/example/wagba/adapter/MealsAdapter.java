@@ -12,7 +12,7 @@ import com.example.wagba.View.MealActivity;
 import com.example.wagba.model.Meal;
 import com.example.wagba.View.RestaurantActivity;
 import com.example.wagba.databinding.MealsItemBinding;
-import com.example.wagba.model.RestaurantModel;
+import com.example.wagba.model.Restaurant;
 import com.example.wagba.utils.Constant;
 
 import java.util.List;
@@ -20,11 +20,11 @@ import java.util.List;
 public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> {
     private List<Meal> meals;
     RestaurantActivity activity;
-    RestaurantModel restaurantModel;
+    Restaurant restaurant;
 
-    public MealsAdapter(List<Meal> meals, RestaurantModel restaurantModel) {
+    public MealsAdapter(List<Meal> meals, Restaurant restaurant) {
         this.meals = meals;
-        this.restaurantModel = restaurantModel;
+        this.restaurant = restaurant;
     }
 
     @NonNull
@@ -49,7 +49,7 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> 
         Intent intent = new Intent(holder.binding.getRoot().getContext(), MealActivity.class);
 
         intent.putExtra(Constant.MEAL_DATA, meal);
-        intent.putExtra(Constant.RESTAURANT_DATA, restaurantModel);
+        intent.putExtra(Constant.RESTAURANT_DATA, restaurant);
 
         holder.binding.btnAdd.setOnClickListener(view -> {
             onMealClicked(intent);

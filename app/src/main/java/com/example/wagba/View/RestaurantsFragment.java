@@ -13,15 +13,15 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.wagba.adapter.RestaurantsAdapter;
+import com.example.wagba.model.Restaurant;
 import com.example.wagba.viewModel.RestaurantsViewModel;
 import com.example.wagba.databinding.FragmentRestaurantsBinding;
-import com.example.wagba.model.RestaurantModel;
 
 import java.util.List;
 
 public class RestaurantsFragment extends Fragment {
     private static final String TAG = "Restaurants Fragment";
-    LiveData<List<RestaurantModel>> _allRestaurantsLiveData;
+    LiveData<List<Restaurant>> _allRestaurantsLiveData;
     private FragmentRestaurantsBinding binding;
     private RestaurantsViewModel restaurantsViewModel;
     private RestaurantsAdapter _adapter;

@@ -10,15 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wagba.View.RestaurantActivity;
 import com.example.wagba.databinding.RestaurantsItemBinding;
-import com.example.wagba.model.RestaurantModel;
+import com.example.wagba.model.Restaurant;
 import com.example.wagba.utils.Constant;
 
 import java.util.List;
 
 public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.ViewHolder>{
-    List<RestaurantModel> restaurantsModels;
+    List<Restaurant> restaurantsModels;
 
-    public RestaurantsAdapter(List<RestaurantModel> restaurantsModels){
+    public RestaurantsAdapter(List<Restaurant> restaurantsModels){
         this.restaurantsModels  = restaurantsModels;
     }
 
@@ -34,7 +34,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        RestaurantModel restaurantsModel = restaurantsModels.get(position);
+        Restaurant restaurantsModel = restaurantsModels.get(position);
         holder.binding.tvName.setText(restaurantsModel.getName());
         holder.binding.tvDescription.setText(restaurantsModel.getDescription());
 

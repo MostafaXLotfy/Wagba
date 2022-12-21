@@ -76,8 +76,6 @@ public class OrdersFragment extends Fragment {
         binding.rcOrders.setAdapter(myOrdersAdapter);
         binding.rcOrders.setLayoutManager(layoutManager);
         binding.rcOrders.addItemDecoration(dividerItemDecoration);
-
-
     }
 
     @Override
