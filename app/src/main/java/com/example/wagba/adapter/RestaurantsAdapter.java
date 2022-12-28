@@ -2,20 +2,25 @@ package com.example.wagba.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.wagba.View.RestaurantActivity;
 import com.example.wagba.databinding.RestaurantsItemBinding;
 import com.example.wagba.model.Restaurant;
 import com.example.wagba.utils.Constant;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
 public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.ViewHolder>{
+    private static final String TAG = "RestaurantsAdapter";
     List<Restaurant> restaurantsModels;
 
     public RestaurantsAdapter(List<Restaurant> restaurantsModels){
@@ -37,6 +42,19 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         Restaurant restaurantsModel = restaurantsModels.get(position);
         holder.binding.tvName.setText(restaurantsModel.getName());
         holder.binding.tvDescription.setText(restaurantsModel.getDescription());
+        String logoPath = restaurantsModel.getLogo();
+        Log.d(TAG, "onBindViewHolder: " + logoPath);
+        if(!logoPath.isEmpty()) {
+            StorageReference storageReference = FirebaseStorage
+                    .getInstance()
+                    .getReference("logos")
+                    .child(logoPath)
+                    ;
+            Glide.with(holder.binding.getRoot().getContext())
+                    .load(storageReference)
+                    .into(holder.binding.ivLogo);
+
+        }
 
         holder.binding.getRoot().setOnClickListener(view ->{
             Context context = view.getContext();

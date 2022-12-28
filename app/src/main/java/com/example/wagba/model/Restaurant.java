@@ -19,6 +19,8 @@ public class Restaurant implements Parcelable {
     private String name;
     private String description;
     private double deliveryFees;
+    @Ignore
+    private String logo;
 
     public Restaurant(){}
 
@@ -34,6 +36,7 @@ public class Restaurant implements Parcelable {
         name = in.readString();
         description = in.readString();
         deliveryFees = in.readDouble();
+        logo = in.readString();
     }
 
     public static final Creator<Restaurant> CREATOR = new Creator<Restaurant>() {
@@ -91,6 +94,14 @@ public class Restaurant implements Parcelable {
         parcel.writeString(name);
         parcel.writeString(description);
         parcel.writeDouble(deliveryFees);
+        parcel.writeString(logo);
     }
 
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
 }

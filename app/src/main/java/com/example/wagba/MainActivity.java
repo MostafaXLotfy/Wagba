@@ -18,7 +18,6 @@ import com.example.wagba.View.RestaurantsFragment;
 import com.example.wagba.databinding.ActivityMainBinding;
 import com.example.wagba.utils.Constant;
 import com.example.wagba.viewModel.MainViewModel;
-import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.Objects;
 

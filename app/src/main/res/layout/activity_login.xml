@@ -17,20 +17,21 @@
             android:layout_marginLeft="20dp"
 
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:autofillHints="emailAddress"
+
             android:hint="@string/email"
+
             android:inputType="textEmailAddress"
 
             android:textColorHint="#78909C"
-
             android:textSize="20sp"
-
             app:layout_constraintBottom_toTopOf="@id/et_password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+
+
             app:layout_constraintTop_toTopOf="parent"
-            android:autofillHints="emailAddress"
-
-
             app:layout_constraintVertical_chainStyle="packed" />
 
         <EditText
@@ -40,19 +41,19 @@
             android:layout_marginLeft="20dp"
 
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:autofillHints="password"
+
             android:hint="@string/password"
             android:inputType="textPassword"
-
             android:textColorHint="#78909C"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@id/cb_rememberMe"
+            app:layout_constraintBottom_toTopOf="@id/btn_register"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.4"
-
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_email"
-            android:autofillHints="password"
-            />
+            app:layout_constraintTop_toBottomOf="@id/et_email" />
 
         <Button
             android:id="@+id/btn_login"
@@ -80,23 +81,11 @@
             android:text="@string/register"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cb_rememberMe"
+            app:layout_constraintTop_toBottomOf="@id/et_password"
             app:layout_constraintStart_toEndOf="@id/btn_login"
             android:textSize="18sp"
             android:backgroundTint="@color/orange"
             android:layout_marginEnd="20dp"
-            />
-        <CheckBox
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="@string/remember_me"
-            app:layout_constraintTop_toBottomOf="@id/et_password"
-            app:layout_constraintEnd_toEndOf="@id/et_email"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/btn_register"
-            android:textSize="20sp"
-            android:id="@+id/cb_rememberMe"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

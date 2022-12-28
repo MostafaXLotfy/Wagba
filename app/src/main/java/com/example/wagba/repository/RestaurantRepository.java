@@ -18,13 +18,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestaurantsMealsRepository {
+public class RestaurantRepository {
     private static final String TAG = "RestaurantsMealsRepo";
     DatabaseReference mealRef;
     List<Meal> _restaurantsMeals;
     MutableLiveData<List<Meal>> _mealsModelLiveData;
 
-    public RestaurantsMealsRepository(Application application){
+    public RestaurantRepository(Application application){
     }
 
     private void getData(String restaurantID){

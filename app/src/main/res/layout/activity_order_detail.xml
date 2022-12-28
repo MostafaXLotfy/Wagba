@@ -40,7 +40,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp"
-                    android:src="@drawable/pizza_hut_logo"
+                    android:src="@drawable/ic_outline_restaurant_24"
                     app:layout_constraintBottom_toBottomOf="@id/tv_name"
 
                     app:layout_constraintEnd_toStartOf="@id/tv_orders_from"

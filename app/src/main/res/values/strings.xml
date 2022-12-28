@@ -43,4 +43,6 @@
     <string name="gate_3">Gate 3</string>
     <string name="male">male</string>
     <string name="sign_out">sign out</string>
+    <string name="female">female</string>
+    <string name="gender">Gender</string>
 </resources>

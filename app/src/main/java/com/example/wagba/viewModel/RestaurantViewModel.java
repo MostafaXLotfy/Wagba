@@ -8,22 +8,22 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.wagba.model.Meal;
-import com.example.wagba.repository.RestaurantsMealsRepository;
+import com.example.wagba.repository.RestaurantRepository;
 
 import java.util.List;
 
 public class RestaurantViewModel extends AndroidViewModel {
     private static final String TAG = "RestaurantViewModel";
-    private RestaurantsMealsRepository restaurantsMealsRepository;
+    private RestaurantRepository restaurantRepository;
     private LiveData<List<Meal>> _mealsModelLiveData;
     public RestaurantViewModel(@NonNull Application application) {
         super(application);
-        restaurantsMealsRepository = new RestaurantsMealsRepository(application);
+        restaurantRepository = new RestaurantRepository(application);
     }
 
     public LiveData<List<Meal>> getRestaurant(String restaurantID){
         if(_mealsModelLiveData == null){
-            _mealsModelLiveData = restaurantsMealsRepository
+            _mealsModelLiveData = restaurantRepository
                     .getRestaurant(restaurantID);
         }
         if(_mealsModelLiveData != null){
