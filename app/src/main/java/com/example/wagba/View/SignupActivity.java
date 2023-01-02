@@ -86,7 +86,9 @@ public class SignupActivity extends AppCompatActivity {
         User user = new User("1", username, email, phone, gender);
         _signupViewModel.signup(user, password).observe(this, user1 -> {
             if(user1 != null){
-                startActivity(new Intent(this, MainActivity.class));
+                Intent intent = new Intent(this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 finish();
             }
         });

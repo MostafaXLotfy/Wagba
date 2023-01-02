@@ -17,4 +17,6 @@ public class Constant {
     public static final String MEAL_DATA = "MEAl_DATA";
     public static final String ORDER_ID = "orderID";
     public static final String USERS_END_POINT = "users";
+    public static final String logos_END_POINT = "logos";
+    public static final String ORDERS_TO_USERS_END_POINT = "ordersToUsers";
 }

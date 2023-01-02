@@ -16,7 +16,6 @@ public class Basket {
             entityColumn = "orderItemID",
             entity = OrderItem.class
     )
-//    @Ignore
     private List<OrderItem> orderItems;
 
     @Relation(
@@ -113,6 +112,10 @@ public class Basket {
 
     private void calculatePayment(OrderItem orderItem){
         this.payment.calculateItemPrice(orderItem);
+    }
+
+    public String getLogo(){
+        return restaurant.getLogo();
     }
 
 }

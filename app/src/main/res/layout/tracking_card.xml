@@ -59,10 +59,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
             app:step_index="5"
-            app:step_is_last="true"
             app:step_summary=""
             app:step_summary_done=""
-            app:step_title="Delivered" />
+            app:step_title="Delivered"
+            app:step_is_last="true"
+
+            />
+
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.cardview.widget.CardView>

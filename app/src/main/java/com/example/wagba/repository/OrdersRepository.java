@@ -17,38 +17,40 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class OrdersRepository {
     private static final String TAG = "OrdersRepository";
     private static MutableLiveData<List<Order>> _ordersLiveData;
     private static List<Order> _orders;
     private DatabaseReference _ordersRef;
+    private DatabaseReference _ordersToUsersRef;
     private Application _application;
 
     public OrdersRepository(Application application) {
         _application = application;
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        _ordersRef = db.getReference(Constant.ORDERS_END_POINT).child(userID);
-        if(_orders == null){
-            getData();
+        _ordersToUsersRef = db.getReference(Constant.ORDERS_TO_USERS_END_POINT).child(userID);
+        _ordersRef = db.getReference(Constant.ORDERS_END_POINT);
+        if (_orders == null) {
+            _orders = new ArrayList<>();
+            _ordersLiveData = new MutableLiveData<>(_orders);
+            this.getAllOrdersFromFirebase();
         }
     }
 
-    //todo:: change this because it will go boom
 
-    private void getData(){
-        _orders = new ArrayList<>();
-        _ordersLiveData = new MutableLiveData<>(_orders);
-        _ordersRef.addChildEventListener(new ChildEventListener() {
+    private void getAllOrdersFromFirebase() {
+        _ordersToUsersRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Order order = snapshot.getValue(Order.class);
-                _orders.add(order);
-               _ordersLiveData.setValue(_orders);
+                String id = Objects.requireNonNull(snapshot.getKey());
+                getOrderFromFirebase(id);
             }
 
             @Override
@@ -68,13 +70,34 @@ public class OrdersRepository {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+    private void getOrderFromFirebase(@NonNull String id) {
+        _ordersRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Order order = snapshot.getValue(Order.class);
+                _orders.add(order);
+                _ordersLiveData.setValue(_orders);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(_application, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
-    public String submitOrder(Order order){
-        String id = _ordersRef.push().getKey();
+    public String submitOrder(Order order) {
+        String id = Objects.requireNonNull(_ordersToUsersRef.push().getKey());
+        _ordersToUsersRef.child(id)
+                .setValue("");
         order.setUid(id);
         _ordersRef.child(id).setValue(order).addOnFailureListener(new OnFailureListener() {
             @Override

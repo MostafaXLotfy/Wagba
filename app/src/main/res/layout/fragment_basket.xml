@@ -4,31 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.BasketFragment"
-    >
+    tools:context=".View.BasketFragment">
+
+    <TextView
+        android:id="@+id/tv_empty_basket"
+        style="@style/PrimaryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/nothing_added_yet"
+        android:visibility="invisible" />
 
     <ScrollView
+        android:id="@+id/sv_basket"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="visible">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="5dp"
             android:paddingTop="5dp"
-            >
+            android:paddingBottom="5dp">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/frag_order_restaurant"
+                style="@style/Theme.Wagba.NoActionBar.CardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="2dp"
-                app:cardMaxElevation="12dp"
-
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +70,7 @@
 
                         android:text="@string/your_order_from"
                         app:layout_constraintBottom_toTopOf="@id/tv_name"
-                        app:layout_constraintEnd_toStartOf="@id/btn_add"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/iv_image"
                         app:layout_constraintTop_toTopOf="@id/iv_image"
                         app:layout_constraintVertical_chainStyle="packed" />
@@ -74,7 +78,7 @@
                     <TextView
                         android:id="@+id/tv_name"
                         style="@style/PrimaryText"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
 
                         android:layout_height="0dp"
 
@@ -88,61 +92,25 @@
                         />
 
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_add"
-                        android:backgroundTint="@color/orange"
-                        android:layout_width="48dp"
-
-
-                        android:layout_height="48dp"
-
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:padding="0dp"
-                        android:text="@string/add"
-
-
-                        app:cornerRadius="5dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.673"
-                        app:layout_constraintStart_toEndOf="@id/tv_name"
-                        app:layout_constraintTop_toTopOf="@+id/tv_orders_from" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/frag_order_details"
+            <include
+                android:id="@+id/cv_details"
+                layout="@layout/order_details_card"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="2dp"
-                app:cardMaxElevation="12dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="true">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rc_order_details"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/basket_order_item"
-                    android:nestedScrollingEnabled="false"
-                    />
-            </androidx.cardview.widget.CardView>
+                android:layout_height="match_parent" />
 
             <androidx.cardview.widget.CardView
                 style="@style/Theme.Wagba.NoActionBar.CardView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <RadioGroup
                     android:id="@+id/rg_delivery_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
-                    >
+                    android:padding="20dp">
 
                     <TextView
                         style="@style/PrimaryText"
@@ -166,17 +134,16 @@
             <include
                 android:id="@+id/cv_payment"
                 layout="@layout/payment_card" />
-            
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_order"
                 android:layout_width="match_parent"
                 android:layout_height="60sp"
-                android:text="@string/order"
-                android:textSize="18sp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:backgroundTint="@color/orange"
-                />
+                android:text="@string/order"
+                android:textSize="18sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

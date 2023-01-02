@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.wagba.adapter.MealsAdapter;
@@ -15,6 +17,7 @@ import com.example.wagba.model.Meal;
 import com.example.wagba.databinding.ActivityRestaurantBinding;
 import com.example.wagba.model.Restaurant;
 import com.example.wagba.utils.Constant;
+import com.example.wagba.utils.ImageLoader;
 import com.example.wagba.viewModel.RestaurantViewModel;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -59,16 +62,8 @@ public class RestaurantActivity extends AppCompatActivity {
         binding.tvName.setText(_restaurant.getName());
         binding.tvDescription.setText(_restaurant.getDescription());
         String logoPath = _restaurant.getLogo();
-        if(!logoPath.isEmpty()) {
-            StorageReference storageReference = FirebaseStorage
-                    .getInstance()
-                    .getReference("logos")
-                    .child(logoPath)
-                    ;
-            Glide.with(binding.getRoot().getContext())
-                    .load(storageReference)
-                    .into(binding.ivLogo);
-
-        }
+        Context context = binding.getRoot().getContext();
+        ImageView imageView = binding.ivLogo;
+        ImageLoader.load(context, imageView, logoPath);
     }
 }

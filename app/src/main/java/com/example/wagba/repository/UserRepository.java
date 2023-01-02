@@ -47,7 +47,6 @@ public class UserRepository {
                     user.setUid(uid);
                     usersRef.child(uid).setValue(user);
                     userLiveData.setValue(user);
-                    _userDao.Insert(user);
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(_application, e.toString(), Toast.LENGTH_SHORT).show();
@@ -87,10 +86,15 @@ public class UserRepository {
     public void signOut() {
         _auth.signOut();
         _userDao.DeleteAll();
+        _userLiveData = null;
+        _user = null;
     }
 
     public LiveData<User> getCurrentUser() {
-        if (_userLiveData != null) return _userLiveData;
+        if (_userLiveData != null) {
+            Log.d(TAG, "getCurrentUser: got you");
+            return _userLiveData;
+        }
         else if (_auth.getCurrentUser() == null) return null;
         else {
             Log.d(TAG, "getCurrentUser: ");

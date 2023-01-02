@@ -2,6 +2,7 @@ package com.example.wagba.model;
 
 import com.example.wagba.utils.Constant;
 import com.example.wagba.utils.OrderStatus;
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.PropertyName;
 
 import java.util.List;
@@ -66,9 +67,6 @@ public class OrderDetail {
         this.status = status;
     }
 
-    public Payment getPayment() {
-        return payment;
-    }
 
     public void setPayment(Payment payment) {
         this.payment = payment;
@@ -78,20 +76,33 @@ public class OrderDetail {
         this.restaurant = restaurant;
     }
 
+    public Payment getPayment() {
+        return payment;
+    }
+
+    @Exclude
     public String getRestaurantName() {
         return restaurant.getName();
     }
 
+    @Exclude
     public float getSubTotal() {
         return payment.getSubTotal();
     }
 
+    @Exclude
     public float getTotal() {
         return payment.getTotal();
     }
 
+    @Exclude
     public float getTax() {
         return payment.getTax();
+    }
+
+    @Exclude
+    public String getLogo(){
+        return restaurant.getLogo();
     }
 
     public float getDeliveryFees() {

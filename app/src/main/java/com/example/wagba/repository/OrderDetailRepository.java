@@ -15,6 +15,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class OrderDetailRepository {
@@ -23,10 +24,8 @@ public class OrderDetailRepository {
     private DatabaseReference _restaurantsRef;
     public OrderDetailRepository(Application application){
         _application = application;
-        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        _ordersDetailsRef = db.getReference(Constant.ORDERS_DETAILS_END_POINT)
-                .child(userID);
+        _ordersDetailsRef = db.getReference(Constant.ORDERS_DETAILS_END_POINT);
         _restaurantsRef = db.getReference(Constant.RESTAURANTS_END_POINT);
     }
 

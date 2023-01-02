@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +15,7 @@ import com.example.wagba.View.RestaurantActivity;
 import com.example.wagba.databinding.RestaurantsItemBinding;
 import com.example.wagba.model.Restaurant;
 import com.example.wagba.utils.Constant;
+import com.example.wagba.utils.ImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -44,25 +46,21 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         holder.binding.tvDescription.setText(restaurantsModel.getDescription());
         String logoPath = restaurantsModel.getLogo();
         Log.d(TAG, "onBindViewHolder: " + logoPath);
-        if(!logoPath.isEmpty()) {
-            StorageReference storageReference = FirebaseStorage
-                    .getInstance()
-                    .getReference("logos")
-                    .child(logoPath)
-                    ;
-            Glide.with(holder.binding.getRoot().getContext())
-                    .load(storageReference)
-                    .into(holder.binding.ivLogo);
-
+        if(restaurantsModel.getName().equals("Food Corner")){
+            Log.d(TAG, "food corner: " + logoPath);
         }
+        Context context = holder.binding.getRoot().getContext();
+        ImageView imageView = holder.binding.ivLogo;
+        ImageLoader.load(context, imageView, logoPath);
+
 
         holder.binding.getRoot().setOnClickListener(view ->{
-            Context context = view.getContext();
             Intent intent = new Intent(context, RestaurantActivity.class);
             intent.putExtra(Constant.RESTAURANT_DATA, restaurantsModel);
             context.startActivity(intent);
         });
     }
+
 
 
     @Override

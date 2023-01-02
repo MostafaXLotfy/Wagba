@@ -1,78 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:padding="10dp">
 
     <Button
         android:id="@+id/btn_add"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:text="@string/add"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tv_description"
-        app:layout_constraintEnd_toStartOf="@id/tv_name"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:backgroundTint="@color/orange"
         android:minWidth="0dp"
         android:minHeight="0dp"
         android:padding="0dp"
-        android:backgroundTint="@color/orange"
-        />
+        android:text="@string/add"
+        app:layout_constraintBottom_toTopOf="@id/tv_description"
+        app:layout_constraintEnd_toStartOf="@id/tv_name"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tv_name"
-        android:layout_width="0dp"
+        style="@style/PrimaryText"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:text="@string/name_placeholder"
 
+
+        android:layout_marginEnd="5dp"
+        android:gravity="center|start"
+        android:text="@string/name_placeholder"
+        app:layout_constraintBottom_toBottomOf="@id/btn_add"
+        app:layout_constraintEnd_toEndOf="parent"
 
         app:layout_constraintStart_toEndOf="@id/btn_add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tv_description"
-        app:layout_constraintTop_toTopOf="@id/btn_add"
-        android:layout_marginEnd="10dp"
-
-        style="@style/PrimaryText"
-        android:gravity="center|start"
-        />
+        app:layout_constraintTop_toTopOf="@id/btn_add" />
 
     <TextView
         android:id="@+id/tv_description"
+        style="@style/SecondaryText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/btn_add"
-        app:layout_constraintBottom_toTopOf="@id/tv_price"
-        app:layout_constraintStart_toStartOf="@id/btn_add"
-        app:layout_constraintEnd_toEndOf="@id/tv_name"
+        android:layout_marginBottom="5dp"
         android:text="@string/description_placeholder"
-        style="@style/SecondaryText"
-        />
+        app:layout_constraintBottom_toTopOf="@id/tv_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/btn_add"
+        app:layout_constraintTop_toBottomOf="@id/btn_add" />
 
     <TextView
         android:id="@+id/tv_price"
+        style="@style/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/price_placeholder"
-        app:layout_constraintStart_toStartOf="@id/tv_description"
-        app:layout_constraintEnd_toStartOf="@id/tv_available"
-        app:layout_constraintTop_toBottomOf="@id/tv_description"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginEnd="20dp"
-        style="@style/price"
-        />
+        android:layout_marginBottom="5dp"
+        android:text="@string/price_placeholder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_available"
+        app:layout_constraintStart_toStartOf="@id/tv_description"
+        app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
     <TextView
         android:id="@+id/tv_available"
+        style="@style/available"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/tv_price"
+        android:text="@string/available"
         app:layout_constraintBottom_toBottomOf="@id/tv_price"
         app:layout_constraintEnd_toEndOf="@id/tv_description"
         app:layout_constraintStart_toEndOf="@id/tv_price"
-        android:text="@string/available"
-        style="@style/available"
-        />
+        app:layout_constraintTop_toTopOf="@id/tv_price" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

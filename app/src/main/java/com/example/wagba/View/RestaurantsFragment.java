@@ -63,7 +63,6 @@ public class RestaurantsFragment extends Fragment {
         _adapter = new RestaurantsAdapter(_allRestaurantsLiveData.getValue());
         Log.d(TAG, "onCreate: here");
         _allRestaurantsLiveData.observe(requireActivity(), restaurantModels -> {
-            //todo: change this
             _adapter.notifyDataSetChanged();
         });
         binding.rvRestaurants.setAdapter(_adapter);

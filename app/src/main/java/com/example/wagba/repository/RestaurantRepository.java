@@ -42,7 +42,6 @@ public class RestaurantRepository {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                //todo:: implement available
             }
 
             @Override

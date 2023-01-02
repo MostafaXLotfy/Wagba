@@ -59,8 +59,8 @@ public class Meal implements Parcelable {
         this.available = available;
     }
 
-    public String isAvailable() {
-        return available ? "Available": "Not Available";
+    public boolean isAvailable() {
+        return available;
     }
 
 

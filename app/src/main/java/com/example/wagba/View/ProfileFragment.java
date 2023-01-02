@@ -1,9 +1,11 @@
 package com.example.wagba.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.wagba.MainActivity;
 import com.example.wagba.R;
 import com.example.wagba.databinding.FragmentProfileBinding;
 import com.example.wagba.model.User;
@@ -71,6 +74,9 @@ public class ProfileFragment extends Fragment {
     }
 
     private void onSignOut(View view){
+        Intent intent = new Intent(requireContext(), LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
         _profileViewModel.signOut();
         requireActivity().finish();
     }
