@@ -2,7 +2,6 @@ package com.example.wagba.View;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,14 +9,11 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.wagba.MainActivity;
 import com.example.wagba.databinding.ActivitySignupBinding;
 import com.example.wagba.model.User;
 import com.example.wagba.viewModel.SignupViewModel;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class SignupActivity extends AppCompatActivity {
     ActivitySignupBinding binding;
@@ -33,9 +29,8 @@ public class SignupActivity extends AppCompatActivity {
         _signupViewModel = ViewModelProvider.AndroidViewModelFactory
                 .getInstance(getApplication()).create(SignupViewModel.class);
 
-        binding.btnRegister.setOnClickListener(view->{
-            signup();
-        });
+        binding.btnRegister.setOnClickListener(this::signup);
+        binding.btnClear.setOnClickListener(this::clear);
 
     }
 
@@ -44,7 +39,17 @@ public class SignupActivity extends AppCompatActivity {
         super.onStart();
     }
 
-    private void signup() {
+    private void clear(View view){
+        binding.etEmail.setText("");
+        binding.etPhone.setText("");
+        binding.etPassword.setText("");
+        binding.etConfirmPassword.setText("");
+        binding.etUsername.setText("");
+        binding.rgGender.clearCheck();
+
+    }
+
+    private void signup(View view) {
         String email = binding.etEmail.getText().toString();
         String phone = binding.etPhone.getText().toString();
         String password = binding.etPassword.getText().toString();

@@ -131,6 +131,7 @@ public class BasketFragment extends Fragment {
     private void setBasketInVisible() {
         binding.svBasket.setVisibility(View.INVISIBLE);
         binding.tvEmptyBasket.setVisibility(View.VISIBLE);
+        binding.rgDeliveryLocation.clearCheck();
     }
 
     @Override

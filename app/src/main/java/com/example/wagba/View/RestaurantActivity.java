@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -50,6 +51,7 @@ public class RestaurantActivity extends AppCompatActivity {
                 _restaurantViewModel.getRestaurant(_restaurant.getUid());
         _adapter = new MealsAdapter(mealsModelLiveData.getValue(), _restaurant);
         mealsModelLiveData.observe(this, mealsModels -> {
+            Log.d(TAG, "init_data: " + mealsModels.size());
             _adapter.notifyDataSetChanged();
         });
     }

@@ -15,7 +15,7 @@
         android:text="@string/nothing_added_yet"
         android:visibility="invisible" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/sv_basket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
 </FrameLayout>
